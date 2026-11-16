@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#152b27">
-<meta name="description" content="Regolamento e linee guida ufficiali del Corpo Docenti di Hogwarts per Nightfall RP, ambientazione 1890.">
-<title>Regolamento Professori | Nightfall RP</title>
+<meta name="description" content="Regolamento Scolastico di Hogwarts per Nightfall RP: norme per studenti e personale, regolamento professori e linee guida. Ambientazione 1890.">
+<title>Regolamento Scolastico | Nightfall RP</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23152b27'/%3E%3Cpath d='M15 13h33v38H15z' fill='none' stroke='%23d5b879' stroke-width='3'/%3E%3Cpath d='M23 24h17M23 32h17M23 40h12' stroke='%23d5b879' stroke-width='2'/%3E%3C/svg%3E">
 <style>
 :root{--deep:#10241f;--green:#19362e;--green2:#244237;--gold:#d7b97a;--gold2:#a88649;--paper:#f4eddc;--paper2:#ebe1ca;--ink:#29372e;--muted:#6e6b5c;--line:#d9ceb4;--red:#8a4c43;--shadow:0 12px 38px #281e0f19}
@@ -26,14 +26,14 @@ dialog{border:1px solid #a68a58;background:#f7f0df;color:var(--ink);padding:0;wi
  <div class="header-inner">
   <a class="brand" href="./" aria-label="Nightfall RP - pagina iniziale">
    <svg class="brand-icon" viewBox="0 0 64 64" fill="none" aria-hidden="true"><path d="M13 9h38v46H13z" stroke="currentColor" stroke-width="2"/><path d="M18 12v40M24 20h20M24 29h20M24 38h16M20 6h30" stroke="currentColor" stroke-width="2"/><path d="m47 6 4-4 4 4-4 4z" fill="currentColor"/></svg>
-   <span><strong>NIGHTFALL</strong><small>ACCADEMIA DI HOGWARTS · 1890</small></span>
+   <span><strong>NIGHTFALL</strong><small>REGOLAMENTO SCOLASTICO · 1890</small></span>
   </a>
   <div class="header-actions"><a href="https://razor5489.github.io/Biblioteca-Nightfall/" target="_blank" rel="noopener noreferrer">Biblioteca di Hogwarts</a><button id="manageBtn" class="manage" type="button">Gestisci regolamento</button></div>
  </div>
 </header>
 <section class="hero">
  <div class="hero-inner">
-  <div><div class="overline">Scuola di Magia e Stregoneria di Hogwarts · Anno 1890</div><h1>Il codice del<br><em>Corpo Docenti.</em></h1><p>Un punto di riferimento per chi insegna, accompagna e contribuisce a far vivere la magia nel mondo di Nightfall Roleplay.</p></div>
+  <div><div class="overline">Scuola di Magia e Stregoneria di Hogwarts · Anno 1890</div><h1>Regolamento<br><em>Scolastico.</em></h1><p>Norme, disciplina e linee guida per la comunità scolastica di Hogwarts: studenti, professori e personale, nel mondo di Nightfall Roleplay.</p></div>
   <div class="seal" aria-hidden="true"><svg viewBox="0 0 140 140" fill="none"><path d="M35 32c17-5 31-3 35 4 8-7 20-9 35-4v69c-14-5-27-3-35 5-7-8-20-10-35-5z" stroke="currentColor" stroke-width="3"/><path d="M70 37v69M44 49h17m-17 10h17m-17 10h17m18-20h17m-17 10h17m-17 10h17" stroke="currentColor" stroke-width="2"/><path d="m70 8 4 14 14 4-14 4-4 14-4-14-14-4 14-4z" fill="currentColor"/></svg></div>
  </div>
 </section>
@@ -43,7 +43,7 @@ dialog{border:1px solid #a68a58;background:#f7f0df;color:var(--ink);padding:0;wi
  <div id="draftBanner" class="notice" hidden>Stai visualizzando modifiche in bozza. Per renderle visibili a tutti, apri «Gestisci regolamento» e premi «Pubblica online».</div>
  <section id="intro" class="intro-panel" hidden><span class="smallcap" id="introLabel">Premessa · Direzione Scolastica</span><p id="preface"></p></section>
  <div class="toolbar">
-  <div class="tabs" role="tablist" aria-label="Sezioni del sito"><button id="tab-regolamento" class="tab" type="button" role="tab" aria-selected="true">Regolamento</button><button id="tab-linee-guida" class="tab" type="button" role="tab" aria-selected="false">Linee guida</button><button id="tab-regolamento-scolastico" class="tab" type="button" role="tab" aria-selected="false">Regolamento scolastico</button></div>
+  <div class="tabs" role="tablist" aria-label="Sezioni del sito"><button id="tab-regolamento-scolastico" class="tab" type="button" role="tab" aria-selected="true">Regolamento scolastico</button><button id="tab-regolamento" class="tab" type="button" role="tab" aria-selected="false">Regolamento professori</button><button id="tab-linee-guida" class="tab" type="button" role="tab" aria-selected="false">Linee guida</button></div>
   <div class="tools"><input id="search" class="search" type="search" placeholder="Cerca un argomento…" aria-label="Cerca nel regolamento"><button id="printBtn" class="tool-btn" type="button">Stampa / PDF</button></div>
  </div>
  <div class="page-head"><span id="pageKicker" class="eyebrow"></span><h2 id="pageTitle"></h2><p id="pageDescription"></p></div>
@@ -52,17 +52,17 @@ dialog{border:1px solid #a68a58;background:#f7f0df;color:var(--ink);padding:0;wi
   <div><div id="sections" class="sections"></div><div id="closingQuote" class="bottom-quote">«Un buon professore non è soltanto colui che insegna, ma colui che crea opportunità di Roleplay per gli altri.»</div></div>
  </div>
 </main>
-<footer><span>NIGHTFALL RP · IL CORPO DOCENTI DI HOGWARTS</span><span>Creato per NightFall da Razor · <a href="https://nightfallroleplay.com/regolamento" target="_blank" rel="noopener noreferrer">Regolamento generale</a></span></footer>
+<footer><span>NIGHTFALL RP · REGOLAMENTO SCOLASTICO DI HOGWARTS</span><span>Creato per NightFall da Razor · <a href="https://nightfallroleplay.com/regolamento" target="_blank" rel="noopener noreferrer">Regolamento generale</a></span></footer>
 <dialog id="adminDialog" aria-labelledby="adminHeading">
- <div class="modal-head"><h2 id="adminHeading">Gestione del regolamento</h2><button id="closeAdmin" class="close" aria-label="Chiudi" type="button">×</button></div>
+ <div class="modal-head"><h2 id="adminHeading">Gestione dei regolamenti scolastici</h2><button id="closeAdmin" class="close" aria-label="Chiudi" type="button">×</button></div>
  <div class="modal-body">
   <section id="authGate" class="login-box">
    <p>Inserisci la <strong>password di gestione</strong> per aggiungere, modificare o eliminare i capitoli del Regolamento e delle Linee guida.</p>
    <form id="loginForm"><label class="field"><span>Password di gestione</span><input id="adminPassword" type="password" autocomplete="current-password" maxlength="256" required placeholder="Inserisci la password"></label><p class="help">La password viene verificata dal servizio protetto, non è pubblicata nel codice del sito e non viene salvata nel browser.</p><div class="actions"><button id="loginBtn" type="submit" class="btn primary">Accedi</button></div><p id="loginStatus" class="state" role="status"></p></form>
   </section>
     <section id="editorPanel" hidden>
-   <div class="editor-header"><div><h3>Il registro del Corpo Docenti</h3><span class="success-hint">Puoi modificare titoli, testi, singole sezioni e ordine dei capitoli.</span></div><div class="actions"><button id="exportBtn" class="btn" type="button">Scarica backup</button><button id="logoutBtn" class="btn" type="button">Esci</button></div></div>
-   <label class="field"><span>Documento da modificare</span><select id="editorPage"><option value="regolamento">Regolamento</option><option value="linee-guida">Linee guida</option><option value="regolamento-scolastico">Regolamento scolastico</option></select></label>
+   <div class="editor-header"><div><h3>Il registro scolastico di Hogwarts</h3><span class="success-hint">Puoi modificare titoli, testi, singole sezioni e ordine dei capitoli.</span></div><div class="actions"><button id="exportBtn" class="btn" type="button">Scarica backup</button><button id="logoutBtn" class="btn" type="button">Esci</button></div></div>
+   <label class="field"><span>Documento da modificare</span><select id="editorPage"><option value="regolamento-scolastico">Regolamento scolastico</option><option value="regolamento">Regolamento professori</option><option value="linee-guida">Linee guida</option></select></label>
    <div class="editor-card" style="margin-bottom:20px">
     <h4>Intestazione del documento</h4>
     <form id="pageForm">
@@ -103,8 +103,8 @@ let state = null;
 let published = null;
 let blobSha = null;
 let secret = null;
-let activePage = "regolamento";
-let editorPage = "regolamento";
+let activePage = "regolamento-scolastico";
+let editorPage = "regolamento-scolastico";
 let editingId = null;
 let busy = false;
 const clone = value => JSON.parse(JSON.stringify(value));
