@@ -273,7 +273,6 @@
         },
         {
           "id": "s-art-04",
-          "chapter": "II — NORME GENERALI DI COMPORTAMENTO",
           "icon": "📜",
           "title": "Art. 4 — Rispetto della comunità scolastica",
           "intro": "Ogni membro della comunità scolastica è tenuto a mantenere un comportamento rispettoso nei confronti di:",
@@ -282,10 +281,12 @@
             "professori;",
             "Prefetti;",
             "Caposcuola;",
+            "Personale scolastico;",
             "Vicepreside;",
             "Preside;",
-            "personale scolastico."
+            "Responsabile Docenti."
           ],
+          "chapter": "II — NORME GENERALI DI COMPORTAMENTO",
           "outro": "Sono vietati insulti, provocazioni, minacce, discriminazioni e qualsiasi comportamento volto a umiliare o intimidire un altro membro della scuola."
         },
         {
