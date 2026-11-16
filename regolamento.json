@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-12",
+  "updatedAt": "2026-11-16",
   "school": "Scuola di Magia e Stregoneria di Hogwarts",
   "era": "Anno 1890",
   "preface": "Il ruolo di professore non si limita all’insegnamento di una materia, ma comprende la responsabilità di contribuire attivamente alla crescita degli studenti e alla qualità del Roleplay all’interno di Hogwarts. Ogni docente è tenuto a seguire le presenti disposizioni, garantendo serietà, collaborazione e rispetto nei confronti degli studenti e dei colleghi.",
@@ -244,13 +244,13 @@
       "sections": [
         {
           "id": "s-art-01",
-          "chapter": "I — GERARCHIA SCOLASTICA",
           "icon": "📜",
           "title": "Art. 1 — Autorità scolastica",
           "intro": "La comunità scolastica di Hogwarts è organizzata secondo il seguente ordine gerarchico:",
           "points": [
-            "Preside → Vicepreside → Docenti → Caposcuola e Prefetti → Studenti"
+            "Responsabile Docenti → Preside → Vicepreside → Docenti → Caposcuola e Prefetti → Studenti"
           ],
+          "chapter": "I — GERARCHIA SCOLASTICA",
           "outro": "Ogni membro della scuola è tenuto a rispettare le disposizioni impartite dalle autorità scolastiche competenti."
         },
         {
