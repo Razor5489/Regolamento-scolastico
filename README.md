@@ -2,7 +2,7 @@
 
 Portale del Regolamento Scolastico di Hogwarts (1890), con disposizioni per studenti e personale, il Regolamento Professori e le linee guida dei docenti.
 
-**Sito pubblico:** https://razor5489.github.io/Regolamento-professori/
+**Sito pubblico:** https://razor5489.github.io/Regolamento-scolastico/
 
 ## Cosa offre il sito
 
@@ -22,10 +22,10 @@ Il sito pubblico è ospitato su GitHub Pages. GitHub Pages non può conservare i
 
 Il codice del backend è nei file `api/login.js`, `api/document.js` e `api/_shared.cjs`.
 
-1. Collega Vercel e importa il repository `Razor5489/Regolamento-professori` come progetto.
+1. Collega Vercel e importa il repository `Razor5489/Regolamento-scolastico` come progetto.
 2. Configura **due variabili segrete**, nelle impostazioni del progetto Vercel:
    - `ADMIN_PASSWORD`: una password forte scelta da te. Se vuoi la stessa della Biblioteca Nightfall, impostala uguale **privatamente nelle impostazioni**, senza comunicarla in chat.
-   - `GITHUB_TOKEN`: un token **fine-grained** del tuo account GitHub, con accesso **solo** a `Regolamento-professori` e permesso **Contents: Read and write**.
+   - `GITHUB_TOKEN`: un token **fine-grained** del tuo account GitHub, con accesso **solo** a `Regolamento-scolastico` e permesso **Contents: Read and write**.
 3. Pubblica il progetto Vercel, ricava il suo URL HTTPS reale.
 4. In GitHub apri `config.json` e imposta `apiUrl` con quell'URL (senza slash finale):
 
