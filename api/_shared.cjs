@@ -2,7 +2,7 @@
 const crypto = require('node:crypto');
 
 const ORIGIN = 'https://razor5489.github.io';
-const GITHUB_URL = 'https://api.github.com/repos/Razor5489/Regolamento-professori/contents/regolamento.json';
+const GITHUB_URL = 'https://api.github.com/repos/Razor5489/Regolamento-scolastico/contents/regolamento.json';
 const GH_HEADERS = {
   'Accept': 'application/vnd.github+json',
   'X-GitHub-Api-Version': '2022-11-28',
