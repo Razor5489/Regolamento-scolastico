@@ -1,6 +1,6 @@
-# NIGHTFALL RP · Regolamento Professori
+# NIGHTFALL RP · Regolamento Scolastico
 
-I regolamenti del Corpo Docenti e dell'intera comunità scolastica di Hogwarts (1890), con le linee guida per i professori.
+Portale del Regolamento Scolastico di Hogwarts (1890), con disposizioni per studenti e personale, il Regolamento Professori e le linee guida dei docenti.
 
 **Sito pubblico:** https://razor5489.github.io/Regolamento-professori/
 
