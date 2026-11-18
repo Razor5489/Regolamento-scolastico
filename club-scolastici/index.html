@@ -76,6 +76,23 @@
 .registry-tip{text-align:center;color:#7f755f;font-size:12px;margin:24px auto 0;max-width:770px}
 @media(max-width:700px){.registry-grid{grid-template-columns:1fr}.registry-card{padding:18px}.registry-row{grid-template-columns:112px minmax(0,1fr);gap:9px}.registry-top h3{font-size:25px}}
 
+
+/* Modifica rapida nominativi dei referenti */
+.quick-registry{margin:18px 0 22px;background:#f4e9d3;border:1px solid #d3ba94;padding:0}
+.quick-registry>summary{cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:14px;list-style:none;padding:16px 18px;color:#334155;font:700 14px var(--body);background:#ebdcbd}
+.quick-registry>summary::-webkit-details-marker{display:none}
+.quick-registry>summary:after{content:"+";font-size:21px;color:#8a6940}
+.quick-registry[open]>summary:after{content:"−"}
+.quick-registry p{font-size:12px;line-height:1.6;padding:0 18px;color:#655b4d;margin:14px 0 5px}
+.quick-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding:16px 18px 20px}
+.quick-card{background:#fffaf0;border:1px solid #d6c4a8;padding:16px}
+.quick-card h4{font:600 23px/1.1 var(--display);margin:0 0 14px;color:#324352;border-bottom:1px solid #e0d3ba;padding-bottom:10px}
+.quick-card label{display:grid;gap:6px;margin-top:11px;color:#6b593e;font-size:11px;font-weight:800}
+.quick-card input{width:100%;background:#fff;border:1px solid #cbbd9f;padding:10px 11px;color:#213141;font:13px var(--body);border-radius:0}
+.quick-card input:focus-visible{outline:2px solid #aa854f;outline-offset:2px}
+.quick-info{padding:0 18px 17px;color:#715c40;font-size:11px;display:block}
+@media(max-width:720px){.quick-grid{grid-template-columns:1fr}.quick-registry>summary{font-size:12px}.quick-card h4{font-size:21px}}
+
 </style></head>
 <body><a class="skip" href="#main">Vai al contenuto</a>
 <header class="header"><div class="shell header-inner"><a class="brand" href="#inizio"><span class="brand-mark">H</span><span><strong class="brand-title">HOGWARTS</strong><small class="brand-caption">CLUB SCOLASTICI · NIGHTFALL RP</small></span></a><button class="menu-btn" id="menu" aria-controls="nav" aria-expanded="false">Menu ☰</button><nav class="nav" id="nav" aria-label="Navigazione principale"><a href="#club">I Club</a><a href="#futuro">Dopo il diploma</a><a href="#regolamento">Regolamento</a><a href="#iscrizioni">Iscrizioni</a><a href="#organizzazione">Organizzazione</a><a class="registry-navigation" href="#referenti">Referenti Club</a><a href="#faq">FAQ</a><button id="managePageBtn" class="admin-open" type="button">⚙ Gestisci pagina</button></nav></div></header>
@@ -93,50 +110,50 @@
  <div class="registry-grid">
 <article class="registry-card" style="--tone:#9d6c85">
   <div class="registry-top"><h3>Club di Pozioni</h3><span class="registry-icon" aria-hidden="true">⚗</span></div>
-  <div class="registry-row"><span class="registry-role">Responsabile</span><span class="registry-name placeholder" data-registry="0-lead">Da assegnare</span></div>
-  <div class="registry-row"><span class="registry-role">Vice Responsabile</span><span class="registry-name placeholder" data-registry="0-vice">Da assegnare</span></div>
+  <div class="registry-row"><span class="registry-role">Responsabile Pozioni</span><span class="registry-name placeholder" data-registry="0-lead">Da assegnare</span></div>
+  <div class="registry-row"><span class="registry-role">Vice Responsabile Pozioni</span><span class="registry-name placeholder" data-registry="0-vice">Da assegnare</span></div>
 </article>
 
 <article class="registry-card" style="--tone:#c69b63">
   <div class="registry-top"><h3>Club di Duelli</h3><span class="registry-icon" aria-hidden="true">⚔</span></div>
-  <div class="registry-row"><span class="registry-role">Responsabile</span><span class="registry-name placeholder" data-registry="1-lead">Da assegnare</span></div>
-  <div class="registry-row"><span class="registry-role">Vice Responsabile</span><span class="registry-name placeholder" data-registry="1-vice">Da assegnare</span></div>
+  <div class="registry-row"><span class="registry-role">Responsabile Duelli</span><span class="registry-name placeholder" data-registry="1-lead">Da assegnare</span></div>
+  <div class="registry-row"><span class="registry-role">Vice Responsabile Duelli</span><span class="registry-name placeholder" data-registry="1-vice">Da assegnare</span></div>
 </article>
 
 <article class="registry-card" style="--tone:#7991b7">
   <div class="registry-top"><h3>Club di DCAO</h3><span class="registry-icon" aria-hidden="true">✧</span></div>
-  <div class="registry-row"><span class="registry-role">Responsabile</span><span class="registry-name placeholder" data-registry="2-lead">Da assegnare</span></div>
-  <div class="registry-row"><span class="registry-role">Vice Responsabile</span><span class="registry-name placeholder" data-registry="2-vice">Da assegnare</span></div>
+  <div class="registry-row"><span class="registry-role">Responsabile DCAO</span><span class="registry-name placeholder" data-registry="2-lead">Da assegnare</span></div>
+  <div class="registry-row"><span class="registry-role">Vice Responsabile DCAO</span><span class="registry-name placeholder" data-registry="2-vice">Da assegnare</span></div>
 </article>
 
 <article class="registry-card" style="--tone:#8a8da9">
   <div class="registry-top"><h3>Club del Libro</h3><span class="registry-icon" aria-hidden="true">✦</span></div>
-  <div class="registry-row"><span class="registry-role">Responsabile</span><span class="registry-name placeholder" data-registry="3-lead">Da assegnare</span></div>
-  <div class="registry-row"><span class="registry-role">Vice Responsabile</span><span class="registry-name placeholder" data-registry="3-vice">Da assegnare</span></div>
+  <div class="registry-row"><span class="registry-role">Responsabile Club del Libro</span><span class="registry-name placeholder" data-registry="3-lead">Da assegnare</span></div>
+  <div class="registry-row"><span class="registry-role">Vice Responsabile Club del Libro</span><span class="registry-name placeholder" data-registry="3-vice">Da assegnare</span></div>
 </article>
 
 <article class="registry-card" style="--tone:#7c9c87">
   <div class="registry-top"><h3>Club di Creature Magiche</h3><span class="registry-icon" aria-hidden="true">❖</span></div>
-  <div class="registry-row"><span class="registry-role">Responsabile</span><span class="registry-name placeholder" data-registry="4-lead">Da assegnare</span></div>
-  <div class="registry-row"><span class="registry-role">Vice Responsabile</span><span class="registry-name placeholder" data-registry="4-vice">Da assegnare</span></div>
+  <div class="registry-row"><span class="registry-role">Responsabile Creature Magiche</span><span class="registry-name placeholder" data-registry="4-lead">Da assegnare</span></div>
+  <div class="registry-row"><span class="registry-role">Vice Responsabile Creature Magiche</span><span class="registry-name placeholder" data-registry="4-vice">Da assegnare</span></div>
 </article>
 
 <article class="registry-card" style="--tone:#8e87bb">
   <div class="registry-top"><h3>Club di Trasfigurazione</h3><span class="registry-icon" aria-hidden="true">✺</span></div>
-  <div class="registry-row"><span class="registry-role">Responsabile</span><span class="registry-name placeholder" data-registry="5-lead">Da assegnare</span></div>
-  <div class="registry-row"><span class="registry-role">Vice Responsabile</span><span class="registry-name placeholder" data-registry="5-vice">Da assegnare</span></div>
+  <div class="registry-row"><span class="registry-role">Responsabile Trasfigurazione</span><span class="registry-name placeholder" data-registry="5-lead">Da assegnare</span></div>
+  <div class="registry-row"><span class="registry-role">Vice Responsabile Trasfigurazione</span><span class="registry-name placeholder" data-registry="5-vice">Da assegnare</span></div>
 </article>
 
 <article class="registry-card" style="--tone:#88a879">
   <div class="registry-top"><h3>Club di Erbologia</h3><span class="registry-icon" aria-hidden="true">❀</span></div>
-  <div class="registry-row"><span class="registry-role">Responsabile</span><span class="registry-name placeholder" data-registry="6-lead">Da assegnare</span></div>
-  <div class="registry-row"><span class="registry-role">Vice Responsabile</span><span class="registry-name placeholder" data-registry="6-vice">Da assegnare</span></div>
+  <div class="registry-row"><span class="registry-role">Responsabile Erbologia</span><span class="registry-name placeholder" data-registry="6-lead">Da assegnare</span></div>
+  <div class="registry-row"><span class="registry-role">Vice Responsabile Erbologia</span><span class="registry-name placeholder" data-registry="6-vice">Da assegnare</span></div>
 </article>
 
 <article class="registry-card" style="--tone:#7daba8">
   <div class="registry-top"><h3>Percorso di Medimagia</h3><span class="registry-icon" aria-hidden="true">✚</span></div>
-  <div class="registry-row"><span class="registry-role">Responsabile</span><span class="registry-name placeholder" data-registry="7-lead">Da assegnare</span></div>
-  <div class="registry-row"><span class="registry-role">Vice Responsabile</span><span class="registry-name placeholder" data-registry="7-vice">Da assegnare</span></div>
+  <div class="registry-row"><span class="registry-role">Responsabile Medimagia</span><span class="registry-name placeholder" data-registry="7-lead">Da assegnare</span></div>
+  <div class="registry-row"><span class="registry-role">Vice Responsabile Medimagia</span><span class="registry-name placeholder" data-registry="7-vice">Da assegnare</span></div>
 </article></div>
  <p class="registry-tip">Per Medimagia sono riportati i referenti organizzativi del percorso: la supervisione didattica resta affidata al docente di riferimento.</p>
 </div></section>
@@ -154,6 +171,13 @@
   <section id="adminEditor" class="admin-hidden">
    <div class="admin-caution"><strong>Modifica tutti i testi:</strong> puoi aggiornare titoli, sottotitoli, avvisi, descrizioni, schede dei Club, nomi dei Professori Fondatori, articoli, domande frequenti, pulsanti e footer. Le modifiche sono visibili in anteprima solo a te finché non premi <strong>Pubblica online</strong>. Il salvataggio pubblica direttamente sul repository GitHub, senza download manuali.</div>
    <div class="admin-panel-head"><div><h3>Testi della pagina</h3><small>Seleziona una sezione o cerca una frase per modificarla.</small></div><button id="adminLogout" type="button" class="admin-btn secondary">Esci dalla gestione</button></div>
+
+   <details class="quick-registry" id="adminQuickRegistry" open>
+    <summary>✦ Gestione rapida — Responsabili e Vice Responsabili dei Club</summary>
+    <p>Ogni incarico ha un campo distinto, identificato dal proprio Club. Modifica i nominativi qui sotto e poi premi <strong>Pubblica online su GitHub</strong> in fondo al pannello.</p>
+    <div class="quick-grid" id="adminQuickRegistryGrid"></div>
+    <small class="quick-info">I nomi sono mostrati anche nella sezione «Referenti Club» del sito. Se la posizione è vacante, lascia «Da assegnare».</small>
+   </details>
    <div class="admin-settings"><h4>Impostazioni della pagina (SEO)</h4><div class="admin-setting-grid"><label>Titolo della scheda del browser<input id="adminSeoTitle" maxlength="220"></label><label>Descrizione per i motori di ricerca<input id="adminSeoDescription" maxlength="600"></label></div></div>
    <div class="admin-toolbar"><input id="adminSearch" class="admin-search" type="search" placeholder="Cerca parole, Club, professori, articoli..." aria-label="Cerca un testo"><select class="admin-filter" id="adminSection" aria-label="Filtra per sezione"><option value="all">Tutta la pagina</option><option value="header">Navigazione</option><option value="inizio">Homepage</option><option value="notice">Avviso sul limite</option><option value="club">Club e fondatori</option><option value="futuro">Professioni e futuro</option><option value="regolamento">Regolamento (12 articoli)</option><option value="iscrizioni">Iscrizioni</option><option value="organizzazione">Organizzazione</option><option value="referenti">Responsabili e Vice Responsabili</option><option value="faq">Domande frequenti</option><option value="footer">Footer</option></select></div>
    <div id="adminCount" class="admin-page-count" role="status"></div>
@@ -223,11 +247,16 @@
    const parent=node.parentElement;
    if(!parent)continue;
    const club=parent.closest(".club-card");
+   const registryCard=parent.closest(".registry-card");
+   const registryRole=parent.closest(".registry-row")?.querySelector(".registry-role")?.textContent?.trim()||"";
    const rule=parent.closest(".rule");
    const faq=parent.closest(".faq");
    const clubName=club?.querySelector("h3")?.textContent||"";
    let context=sectionNames[section]||section;
    if(clubName)context+=" · "+clubName;
+   if(registryCard)context+=" · "+(registryCard.querySelector("h3")?.textContent||"Club");
+   if(registryRole)context+=" · "+registryRole;
+   if(parent.matches(".registry-name"))context+=" · Nominativo";
    if(rule)context+=" · Articolo "+(Array.from(document.querySelectorAll(".rule")).indexOf(rule)+1);
    if(faq)context+=" · Domanda "+(Array.from(document.querySelectorAll(".faq")).indexOf(faq)+1);
    if(parent.closest(".faculty"))context+=" · Professore Fondatore";
@@ -270,6 +299,33 @@
  function refreshState(){
   $("adminUnsaved").textContent=dirty()?"Modifiche non ancora pubblicate":"Nessuna modifica in sospeso";
   $("adminPublish").disabled=busy||!dirty();
+ }
+
+ function renderQuickRegistry(){
+  const target=$("adminQuickRegistryGrid");target.replaceChildren();
+  document.querySelectorAll(".registry-card").forEach((registryCard,index)=>{
+   const title=registryCard.querySelector("h3")?.textContent||"Club";
+   const card=document.createElement("section");card.className="quick-card";
+   const heading=document.createElement("h4");heading.textContent=title;card.append(heading);
+   const fields=["lead","vice"];
+   for(const field of fields){
+    const span=registryCard.querySelector('[data-registry="'+index+'-'+field+'"]');
+    if(!span)continue;
+    const item=editables.find(x=>x.node.parentElement===span);
+    if(!item)continue;
+    const row=span.closest(".registry-row");
+    const label=document.createElement("label");label.textContent=row?.querySelector(".registry-role")?.textContent||"Nominativo";
+    const input=document.createElement("input");input.type="text";input.maxLength=160;input.value=getText(item);
+    input.setAttribute("aria-label",label.textContent+" — "+title);
+    input.addEventListener("input",()=>{
+     setText(item,input.value);
+     const standard=$("f-"+item.key);if(standard)standard.value=input.value;
+     refreshState();
+    });
+    label.append(input);card.append(label);
+   }
+   target.append(card);
+  });
  }
  function sectionSearch(){
   const filter=$("adminSection").value,term=$("adminSearch").value.trim().toLocaleLowerCase("it");
@@ -351,7 +407,7 @@
   gate.classList.toggle("admin-hidden",!!pass);
   editor.classList.toggle("admin-hidden",!pass);
   $("adminPassword").value="";setStatus("","adminLoginStatus");
-  if(pass){sectionSearch();refreshState();}
+  if(pass){renderQuickRegistry();sectionSearch();refreshState();}
   document.getElementById("nav").classList.remove("open");$("menu").setAttribute("aria-expanded","false");$("menu").textContent="Menu ☰";
  });
  $("adminClose").addEventListener("click",()=>dialog.close());
@@ -371,7 +427,7 @@
    $("adminSeoTitle").value=document.title;
    $("adminSeoDescription").value=document.querySelector('meta[name="description"]')?.content||"";
    $("adminSection").value="all";$("adminSearch").value="";
-   sectionSearch();refreshState();setStatus("Accesso riuscito. Le modifiche saranno pubblicate soltanto quando premi «Pubblica online». ");
+   renderQuickRegistry();sectionSearch();refreshState();setStatus("Accesso riuscito. Le modifiche saranno pubblicate soltanto quando premi «Pubblica online». ");
   }catch(error){pass=null;setStatus(error.status===401?"Password errata.":error.message,"adminLoginStatus")}
   finally{busy=false;$("adminLoginBtn").disabled=false;$("adminPassword").value=""}
  });
@@ -390,7 +446,7 @@
  $("adminDiscard").addEventListener("click",()=>{
   if(!basePage)return;
   if(dirty()&&!confirm("Vuoi scartare tutte le modifiche non pubblicate?"))return;
-  applyPage(basePage);refreshState();renderFields();setStatus("Tutte le modifiche locali sono state scartate.");
+  applyPage(basePage);renderQuickRegistry();refreshState();renderFields();setStatus("Tutte le modifiche locali sono state scartate.");
  });
  $("adminPublish").addEventListener("click",async()=>{
   if(busy||!pass||!basePage)return;
