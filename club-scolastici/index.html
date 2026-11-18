@@ -17,93 +17,50 @@
 @media(max-width:700px){.shell{width:min(100% - 28px,1200px)}.header-inner{height:67px}.brand-title{font-size:13px}.menu-btn{display:block}.nav{display:none;position:absolute;top:67px;left:0;right:0;background:#101b29;flex-direction:column;align-items:stretch;padding:10px 25px 23px;border-bottom:1px solid var(--gold)}.nav.open{display:flex}.nav a{padding:11px 0;font-size:13px}.hero-wrap{padding:58px 0 40px}.hero h1{font-size:57px}.hero-stats{gap:16px}.hero-stats b{font-size:27px}.hero-illustration{min-height:260px}.illustration-caption{bottom:0;font-size:18px}.notice-inner{align-items:flex-start;gap:13px}.notice a{display:none}.section{padding:66px 0}.section-title{font-size:48px}.club-grid,.path-grid,.roles{grid-template-columns:1fr}.club-desc{min-height:0}.search-row{align-items:stretch;flex-direction:column}.rule-sidebar nav{grid-template-columns:1fr 1fr}.rule summary{font-size:18px;padding:17px 12px;gap:10px}.rule-body{padding:12px 18px}.steps{grid-template-columns:1fr}.footer-upper,.footer-bottom{align-items:flex-start;flex-direction:column}.glossary{flex-wrap:wrap;gap:5px 17px}}
 @media print{.header,.menu-btn,.hero,.notice,.search-row,.rule-sidebar,.steps,.faq-list,.footer,.to-top,.club-grid,.path-grid,.roles{display:none!important}body{background:white;color:#111}.section{padding:0}.section:not(#regolamento){display:none!important}#regolamento .section-heading{margin:0 0 14px}.rule-layout{display:block}.rule{border:0;break-inside:avoid}.rule .rule-body{display:block!important;padding:0 0 9px 25px}.rule summary{padding:7px 0!important;border:0!important}.rule .rule-plus{display:none}details:not([open])>.rule-body{display:block!important}.rule-body p{font-size:11px;margin:5px 0}}
 
-/* Gestione visuale locale e pubblicazione tramite GitHub */
-.admin-trigger{background:transparent;border:1px solid #d3b57b;color:#f3e4bd;white-space:nowrap;padding:10px 14px;font:700 11px var(--body);letter-spacing:.04em;transition:background .2s,color .2s}
-.admin-trigger:hover,.admin-trigger:focus-visible{background:#c8a86b;color:#101b29}
-.local-draft{background:#f8e9c8;border-bottom:1px solid #cbb386;padding:9px 0;font-size:12px;color:#51422a;text-align:center}
-.admin-dialog{border:1px solid #9d7c49;max-width:min(900px,calc(100% - 26px));width:900px;max-height:min(92vh,900px);padding:0;background:#f8f0df;color:#24313b;box-shadow:0 25px 80px #050b13bb}
-.admin-dialog::backdrop{background:#07111bc9;backdrop-filter:blur(4px)}
-.admin-heading{padding:24px 28px;background:linear-gradient(110deg,#0c1c2a,#20384a);color:#f5e9cf;display:flex;align-items:center;justify-content:space-between;gap:20px}
-.admin-heading h2{font:500 36px/1.1 var(--display);margin:0}
-.admin-heading small{display:block;text-transform:uppercase;letter-spacing:.2em;color:#d0aa67;font-size:10px;margin-bottom:7px}
-.admin-close{font-size:26px;background:transparent;border:1px solid #a68b6255;color:#e9d5ab;width:42px;height:42px;line-height:1}
-.admin-main{padding:24px 28px;overflow:auto;max-height:calc(90vh - 105px)}
-.admin-info{font-size:12px;line-height:1.7;background:#eee2cb;border-left:3px solid #bb995f;padding:13px 17px;margin-bottom:19px}
-.admin-tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:19px}
-.admin-tabs button{border:1px solid #d1bf9f;background:#fff9ed;padding:9px 13px;font-size:12px;color:#3e4a55}
-.admin-tabs button[aria-selected="true"]{background:#183043;color:#f5ead5;border-color:#183043}
-.admin-form{display:grid;gap:14px}.admin-form[hidden]{display:none}
-.admin-form label{display:grid;gap:6px;font-size:12px;font-weight:700;color:#5c523f}
-.admin-form input,.admin-form select,.admin-form textarea{display:block;width:100%;padding:10px 12px;color:#233342;background:#fffcf6;border:1px solid #cbbd9f;font:13px/1.5 var(--body);border-radius:0}
-.admin-form textarea{min-height:95px;resize:vertical}
-.admin-form textarea.long{min-height:185px}
-.admin-fields{display:grid;grid-template-columns:1fr 1fr;gap:13px}
-.admin-actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center;border-top:1px solid #d9c9ad;margin-top:17px;padding-top:20px}
-.admin-action{background:#173346;color:#f4e9d7;border:1px solid #173346;padding:11px 15px;font:700 12px var(--body)}
-.admin-action.secondary{background:transparent;color:#30445a;border-color:#bfa97e}
-.admin-action.danger{background:transparent;color:#8b403b;border-color:#c6a39c}
-.admin-action:hover{filter:brightness(1.12)}
-.admin-status{font-size:12px;min-height:1.7em;color:#786137;margin:12px 0 0}
-.admin-publish{background:#fff9ed;border:1px solid #dbc7a3;padding:18px;margin-top:17px}
-.admin-publish h3{font:600 26px var(--display);margin:0 0 5px}
-.admin-publish p,.admin-publish ol{font-size:12px;line-height:1.8;margin:5px 0}
-.admin-publish a{color:#775324;text-decoration:underline;text-underline-offset:3px}
-@media(max-width:800px){.admin-trigger{font-size:11px;padding:9px 12px}.admin-dialog{max-height:95vh}.admin-main{padding:17px}.admin-heading{padding:20px}.admin-fields{grid-template-columns:1fr}}
-@media print{.admin-trigger,.local-draft,.admin-dialog{display:none!important}}
+/* GESTIONE PROTETTA DELLE TRADUZIONI E DEI TESTI */
+.admin-open{flex-shrink:0;border:1px solid #bc9e66;background:transparent;color:#f3e5c7;padding:10px 14px;font:700 11px var(--body);cursor:pointer;white-space:nowrap;transition:background .2s}
+.admin-open:hover,.admin-open:focus-visible{background:#c8a86b;color:#132232}
+.admin-dialog{width:min(1000px,calc(100vw - 28px));max-width:1000px;max-height:94vh;background:#f6eedf;border:1px solid #c8a86b;padding:0;color:#26313e;box-shadow:0 20px 70px #080e18dd;overflow:auto}
+.admin-dialog::backdrop{background:#07101fc9;backdrop-filter:blur(4px)}
+.admin-hd{display:flex;justify-content:space-between;align-items:center;gap:18px;padding:23px 26px;background:linear-gradient(120deg,#101b29,#25394a);color:#efe5d0}
+.admin-hd h2{font:500 34px/1.1 var(--display);margin:4px 0}.admin-hd .eyebrow{font-size:10px}
+.admin-close{height:39px;width:39px;background:transparent;border:1px solid #c2aa78;color:#f3e7c9;font-size:22px;cursor:pointer}
+.admin-content{padding:23px 27px}.admin-muted{color:#59606b;font-size:13px;line-height:1.6}
+.admin-login{max-width:480px;margin:12px auto 24px}.admin-login p{font-size:13px;color:#626b73}
+.admin-login label,.admin-settings label{display:grid;gap:7px;font-size:12px;font-weight:700;margin:13px 0;color:#4d5260}
+.admin-login input,.admin-settings input,.admin-setting-input,.admin-search,.admin-filter{width:100%;border:1px solid #cebea1;padding:11px 12px;background:#fffdfa;color:#26313e;font:13px var(--body);border-radius:0;outline-color:#ae8e56}
+.admin-btn{display:inline-flex;justify-content:center;align-items:center;gap:9px;background:#142d3d;border:1px solid #142d3d;padding:11px 15px;color:#f7e9cc;font:700 12px var(--body);cursor:pointer;min-height:42px}
+.admin-btn:hover{background:#254d61}.admin-btn:disabled{opacity:.55;cursor:wait}
+.admin-btn.secondary{background:transparent;color:#223649;border-color:#b7a27d}.admin-btn.secondary:hover{background:#e8dcc6}
+.admin-btn.danger{background:transparent;color:#93463c;border-color:#c49d91}
+.admin-status{font-size:12px;min-height:20px;margin:14px 0;color:#7b5c31;overflow-wrap:anywhere}
+.admin-caution{background:#eee1c9;border-left:3px solid #b48e53;padding:14px 16px;font-size:12px;color:#594d3a;line-height:1.7;margin-bottom:18px}
+.admin-panel-head{display:flex;align-items:flex-start;justify-content:space-between;gap:15px;margin-bottom:16px;flex-wrap:wrap}
+.admin-panel-head h3{font:500 27px var(--display);margin:0 0 4px}.admin-panel-head small{color:#6b7380}
+.admin-toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:18px 0}
+.admin-toolbar .admin-search{flex:2;min-width:180px}.admin-toolbar .admin-filter{flex:1;min-width:180px}
+.admin-text-list{display:grid;gap:10px;max-height:43vh;overflow:auto;scrollbar-color:#ad9168 #f2e6d3;padding:3px 3px 12px}
+.admin-text-item{border:1px solid #d7c6a9;background:#fffaf0;padding:14px}
+.admin-text-item:focus-within{border-color:#9a7440;box-shadow:0 0 0 2px #c8a86b26}
+.admin-text-item label{display:block;color:#7d6548;font-size:11px;font-weight:800;margin-bottom:6px}
+.admin-text-item textarea{width:100%;min-height:47px;resize:vertical;border:1px solid #dbcbad;background:white;padding:9px 11px;color:#223243;font:13px/1.6 var(--body)}
+.admin-text-item small{display:block;font-size:10px;color:#777f85;margin-top:4px}
+.admin-pages{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;color:#6b6e76;font-size:12px;margin:9px 0 20px}
+.admin-setting-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.admin-settings{padding:13px 17px;background:#f1e8d7;border:1px solid #ddcbb1;margin:0 0 18px}
+.admin-settings h4{font:700 13px var(--serif);margin:0 0 5px;color:#705632}
+.admin-bottom{display:flex;gap:9px;justify-content:space-between;align-items:center;flex-wrap:wrap;border-top:1px solid #cdbb99;margin-top:17px;padding-top:16px}
+.admin-unsaved{font-size:12px;color:#8a573c;font-weight:700}
+.admin-note{font-size:11px;color:#6d6f71;margin-top:13px;line-height:1.6}
+.admin-page-count{font-size:11px}
+.admin-hidden{display:none!important}
+@media(max-width:900px){.header-inner{gap:7px}.nav{gap:12px}.admin-open{padding:9px 10px;font-size:10px}}
+@media(max-width:700px){.admin-dialog{max-height:94vh}.admin-hd{padding:17px}.admin-content{padding:18px}.admin-hd h2{font-size:31px}.admin-setting-grid{grid-template-columns:1fr}.admin-text-list{max-height:42vh}.admin-open{width:100%;text-align:center}.nav.open{padding-bottom:15px}}
+@media print{.admin-dialog,.admin-open{display:none!important}}
 
 </style></head>
 <body><a class="skip" href="#main">Vai al contenuto</a>
-<header class="header"><div class="shell header-inner"><a class="brand" href="#inizio"><span class="brand-mark">H</span><span><strong class="brand-title">HOGWARTS</strong><small class="brand-caption">CLUB SCOLASTICI · NIGHTFALL RP</small></span></a><button class="menu-btn" id="menu" aria-controls="nav" aria-expanded="false">Menu ☰</button><nav class="nav" id="nav" aria-label="Navigazione principale"><a href="#club">I Club</a><a href="#futuro">Dopo il diploma</a><a href="#regolamento">Regolamento</a><a href="#iscrizioni">Iscrizioni</a><a href="#organizzazione">Organizzazione</a><a href="#faq">FAQ</a><button type="button" class="admin-trigger" id="openAdmin">⚙ Gestisci pagina</button></nav></div></header>
-
-<div id="localDraft" class="local-draft" hidden>✦ Stai visualizzando una bozza salvata soltanto in questo browser. Per renderla pubblica, usa «Gestisci pagina» e «Scarica index.html».</div>
-<dialog class="admin-dialog" id="adminDialog" aria-labelledby="adminTitle">
- <div class="admin-heading"><div><small>Hogwarts · Gestione contenuti</small><h2 id="adminTitle">Gestisci pagina</h2></div><button type="button" class="admin-close" id="adminClose" aria-label="Chiudi gestione">×</button></div>
- <div class="admin-main">
-  <div class="admin-info"><strong>Editor visuale:</strong> puoi modificare le schede dei Club, gli articoli e le domande frequenti. Le bozze rimangono solo in questo browser. <strong>Per pubblicare davvero su GitHub</strong>, scarica il file HTML aggiornato e sostituisci <code>club-scolastici/index.html</code> nel repository. Questo editor non richiede una password perché non modifica direttamente il sito pubblico.</div>
-  <div class="admin-tabs" role="tablist" aria-label="Sezioni modificabili">
-   <button id="tabClub" type="button" role="tab" aria-selected="true" data-admin-tab="club">Club e professori</button>
-   <button id="tabRule" type="button" role="tab" aria-selected="false" data-admin-tab="rule">Regolamento</button>
-   <button id="tabFaq" type="button" role="tab" aria-selected="false" data-admin-tab="faq">Domande frequenti</button>
-  </div>
-  <form id="adminClubForm" class="admin-form" data-admin-panel="club">
-   <label>Seleziona il Club o il percorso<select id="admClubSelect"></select></label>
-   <div class="admin-fields">
-    <label>Nome del Club<input id="admClubName" maxlength="120" required></label>
-    <label>Professore Fondatore / docente di riferimento<input id="admClubFounder" maxlength="160" placeholder="Da indicare — nominativo da confermare"></label>
-   </div>
-   <label>Descrizione breve<textarea id="admClubDesc" maxlength="1200" required></textarea></label>
-   <label>Cosa si studia<textarea id="admClubFocus" maxlength="2000"></textarea></label>
-   <label>Esempi di attività RP (una per riga)<textarea id="admClubActivities" class="long" maxlength="3500"></textarea></label>
-   <label>Competenze sviluppate<textarea id="admClubSkills" maxlength="1400"></textarea></label>
-   <label>Possibili prospettive dopo il diploma<textarea id="admClubFuture" maxlength="1400"></textarea></label>
-   <button type="submit" class="admin-action">Salva Club nella bozza</button>
-  </form>
-  <form id="adminRuleForm" class="admin-form" data-admin-panel="rule" hidden>
-   <label>Seleziona l'articolo<select id="admRuleSelect"></select></label>
-   <label>Titolo dell'articolo<input id="admRuleTitle" maxlength="160" required></label>
-   <label>Testo completo dell'articolo (separa i paragrafi con una riga vuota)<textarea id="admRuleText" class="long" maxlength="12000" required></textarea></label>
-   <button type="submit" class="admin-action">Salva articolo nella bozza</button>
-  </form>
-  <form id="adminFaqForm" class="admin-form" data-admin-panel="faq" hidden>
-   <label>Seleziona una domanda<select id="admFaqSelect"></select></label>
-   <label>Domanda<input id="admFaqQuestion" maxlength="280" required></label>
-   <label>Risposta<textarea id="admFaqAnswer" class="long" maxlength="4000" required></textarea></label>
-   <button type="submit" class="admin-action">Salva risposta nella bozza</button>
-  </form>
-  <p id="adminStatus" class="admin-status" aria-live="polite"></p>
-  <div class="admin-publish">
-   <h3>Pubblicazione su GitHub</h3>
-   <p>Le modifiche non vengono caricate automaticamente. Per pubblicarle occorre un commit sul tuo repository GitHub.</p>
-   <ol><li>Scarica il file <strong>index.html</strong> aggiornato tramite il pulsante sottostante.</li><li>Apri la cartella <strong>club-scolastici</strong> su GitHub ed effettua l'accesso.</li><li>Sostituisci il file <strong>index.html</strong> con quello scaricato e conferma il commit. GitHub Pages aggiornerà il sito.</li></ol>
-   <div class="admin-actions">
-    <button id="adminDownload" class="admin-action" type="button">Scarica index.html aggiornato ↓</button>
-    <a class="admin-action secondary" href="https://github.com/Razor5489/Regolamento-scolastico/tree/main/club-scolastici" target="_blank" rel="noopener noreferrer">Apri cartella GitHub ↗</a>
-    <button id="adminReset" class="admin-action danger" type="button">Scarta bozza locale</button>
-   </div>
-  </div>
- </div>
-</dialog>
-
+<header class="header"><div class="shell header-inner"><a class="brand" href="#inizio"><span class="brand-mark">H</span><span><strong class="brand-title">HOGWARTS</strong><small class="brand-caption">CLUB SCOLASTICI · NIGHTFALL RP</small></span></a><button class="menu-btn" id="menu" aria-controls="nav" aria-expanded="false">Menu ☰</button><nav class="nav" id="nav" aria-label="Navigazione principale"><a href="#club">I Club</a><a href="#futuro">Dopo il diploma</a><a href="#regolamento">Regolamento</a><a href="#iscrizioni">Iscrizioni</a><a href="#organizzazione">Organizzazione</a><a href="#faq">FAQ</a><button id="managePageBtn" class="admin-open" type="button">⚙ Gestisci pagina</button></nav></div></header>
 <main id="main"><section class="hero" id="inizio"><div class="shell hero-wrap"><div><div class="eyebrow">SCUOLA DI MAGIA E STREGONERIA · 1890</div><h1>Ogni grande mago <em>sceglie la propria strada.</em></h1><p>I Club Scolastici sono il primo passo per coltivare una vocazione, approfondire un talento e costruire la storia del tuo personaggio dentro e oltre le mura di Hogwarts.</p><div class="hero-buttons"><a class="btn btn-gold" href="#club">Esplora i percorsi ↗</a><a class="btn btn-outline" href="#regolamento">Leggi il regolamento ↓</a></div><div class="hero-stats"><div><b>07</b><small>Club scolastici</small></div><div><b>01</b><small>Percorso di Medimagia</small></div><div><b>01</b><small>Iscrizione per persona</small></div></div></div><div class="hero-illustration"><svg viewBox="0 0 500 470" aria-hidden="true"><g fill="none" stroke="#c8a86b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" opacity=".84"><circle cx="249" cy="225" r="199" stroke-dasharray="2 8" opacity=".4"/><circle cx="249" cy="225" r="175" opacity=".22"/><path d="M38 415h425M74 413V250l27-23 28 23v163M87 228V138l13-22 16 22v91M102 115V65M153 413V245l23-25h50l23 25v168M176 218V150l24-48 26 48v68M201 102V54M251 413V290l26-23h55l26 23v123M277 267V179l27-67 27 67v88M303 111V60M364 413V245l22-20h52l20 20v168M387 223V148l26-58 26 58v75M413 91V47M129 413h27m94 0h27m80 0h9M76 282h52m50-20h50m29 56h100m9-52h89M190 326h29m174 0h40M93 360h21M286 343h34"/><path d="M97 413v-42q16-22 29 0v42m64 0v-58q18-28 35 0v58m68 0v-73q20-29 40 0v73m73 0v-52q17-27 31 0v52"/></g><g fill="#d2b783" opacity=".75"><circle cx="87" cy="87" r="2"/><circle cx="373" cy="52" r="2"/><circle cx="49" cy="218" r="2"/><circle cx="458" cy="174" r="2"/><circle cx="345" cy="78" r="2"/></g></svg><div class="illustration-caption">Una scuola. Molte strade.<br>Una scelta che ti appartiene.</div></div></div></section>
 <div class="notice"><div class="shell notice-inner"><span class="notice-glyph" aria-hidden="true">✦</span><p><strong>UNA SOLA SCELTA — 1 SOLO CLUB PER PERSONA (OOC).</strong> Il limite vale anche con più personaggi e comprende il percorso di Medimagia.</p><a href="#art-4">Leggi l'articolo 4 ↗</a></div></div>
 <section class="section light" id="club"><div class="shell"><div class="section-heading center"><div class="eyebrow dark">I PERCORSI DI HOGWARTS</div><h2 class="section-title">Trova la tua <em>vocazione</em></h2><p>Sette Club tradizionali e un percorso formativo dedicato alle arti curative. Ogni scheda spiega cosa si studia, quali attività si possono svolgere e quali strade future potrebbe ispirare.</p><div class="ornament">━━━━ ✧ ━━━━</div></div><div class="search-row"><label class="search"><span aria-hidden="true">⌕</span><input type="search" id="club-search" aria-label="Cerca un Club" placeholder="Cerca un Club, una materia o una professione..."></label><div id="club-count" class="count">8 percorsi disponibili</div></div><div class="club-grid"><article class="club-card" data-query="club di pozioni  studio degli ingredienti magici, delle loro proprietà e delle fasi di preparazione; osservazione degli effetti, annotazione dei risultati e cura della sicurezza. possibile pozionista, esperto di preparati magici o ricercatore nel settore delle pozioni. club scolastico" style="--tone:#9d6c85"><div class="card-top"><span class="club-num">01 / CLUB</span><span class="club-glyph" aria-hidden="true">⚗</span></div><p class="club-kind">Club scolastico</p><h3>Club di Pozioni</h3><p class="club-desc">Dalla scelta degli ingredienti alla precisione nella preparazione: un percorso per comprendere i principi delle pozioni e il metodo del pozionista.</p><div class="career-tag"><span>Possibili sbocchi</span><p>Possibile pozionista, esperto di preparati magici o ricercatore nel settore delle pozioni.</p></div><details class="club-more"><summary>Scopri il percorso <span aria-hidden="true">＋</span></summary><div class="expanded"><h4>Cosa si studia</h4><p>Studio degli ingredienti magici, delle loro proprietà e delle fasi di preparazione; osservazione degli effetti, annotazione dei risultati e cura della sicurezza.</p><h4>Esempi di attività RP</h4><ul><li>Laboratori guidati e simulazioni di preparazione con procedure consentite</li><li>Schede di ricerca sugli ingredienti e confronti tra metodi</li><li>Diari di laboratorio, osservazione dei risultati e lavoro in squadra</li></ul><h4>Competenze da sviluppare</h4><p>Metodo, attenzione, precisione, documentazione e capacità di collaborare.</p><div class="faculty"><strong>Professore Fondatore</strong><span>Da indicare — nominativo da confermare</span></div><p class="tiny-note">Le professioni indicate sono possibilità narrative, non incarichi né titoli concessi automaticamente.</p></div></details></article><article class="club-card" data-query="club di duelli  tecniche di duello consentite, postura, strategia, rispetto dell'avversario, gestione dei tempi e difesa personale. possibile duellante, istruttore di combattimento magico o altra professione che richieda abilità nei duelli. club scolastico" style="--tone:#c69b63"><div class="card-top"><span class="club-num">02 / CLUB</span><span class="club-glyph" aria-hidden="true">⚔</span></div><p class="club-kind">Club scolastico</p><h3>Club di Duelli</h3><p class="club-desc">Disciplina, autocontrollo e lettura del confronto magico. Il Club approfondisce il duello come pratica regolamentata, non come occasione di scontro indiscriminato.</p><div class="career-tag"><span>Possibili sbocchi</span><p>Possibile duellante, istruttore di combattimento magico o altra professione che richieda abilità nei duelli.</p></div><details class="club-more"><summary>Scopri il percorso <span aria-hidden="true">＋</span></summary><div class="expanded"><h4>Cosa si studia</h4><p>Tecniche di duello consentite, postura, strategia, rispetto dell'avversario, gestione dei tempi e difesa personale.</p><h4>Esempi di attività RP</h4><ul><li>Esercitazioni concordate in contesti controllati</li><li>Confronto su strategie di difesa e condotta sportiva</li><li>Tornei o dimostrazioni soltanto se autorizzati</li></ul><h4>Competenze da sviluppare</h4><p>Prontezza, autocontrollo, fair play e valutazione delle situazioni.</p><div class="faculty"><strong>Professore Fondatore</strong><span>Da indicare — nominativo da confermare</span></div><p class="tiny-note">Le professioni indicate sono possibilità narrative, non incarichi né titoli concessi automaticamente.</p></div></details></article><article class="club-card" data-query="difesa contro le arti oscure club dcao individuazione delle minacce, principi di protezione e contrasto, valutazione del rischio, intervento responsabile e prevenzione. possibile aspirante auror o candidato a incarichi nell'ambito della sicurezza magica, secondo le selezioni e i requisiti futuri del server. club scolastico · nuova introduzione" style="--tone:#7991b7"><div class="card-top"><span class="club-num">03 / CLUB</span><span class="club-glyph" aria-hidden="true">✧</span></div><p class="club-kind">Club scolastico · nuova introduzione</p><h3>Difesa Contro le Arti Oscure</h3><p class="club-desc">Riconoscere i pericoli è il primo passo per affrontarli. Il Club DCAO approfondisce la protezione contro le Arti Oscure e le responsabilità di chi difende la comunità magica.</p><div class="career-tag"><span>Possibili sbocchi</span><p>Possibile aspirante Auror o candidato a incarichi nell'ambito della sicurezza magica, secondo le selezioni e i requisiti futuri del server.</p></div><details class="club-more"><summary>Scopri il percorso <span aria-hidden="true">＋</span></summary><div class="expanded"><h4>Cosa si studia</h4><p>Individuazione delle minacce, principi di protezione e contrasto, valutazione del rischio, intervento responsabile e prevenzione.</p><h4>Esempi di attività RP</h4><ul><li>Analisi di casi e scenari di pericolo in Roleplay</li><li>Esercitazioni difensive coerenti con gli insegnamenti ricevuti</li><li>Discussioni su prudenza, etica e collaborazione nella difesa</li></ul><h4>Competenze da sviluppare</h4><p>Osservazione, sangue freddo, responsabilità, prevenzione e collaborazione.</p><div class="faculty"><strong>Professore Fondatore</strong><span>Da indicare — nominativo da confermare</span></div><p class="tiny-note">Le professioni indicate sono possibilità narrative, non incarichi né titoli concessi automaticamente.</p></div></details></article><article class="club-card" data-query="club del libro  lettura e confronto di testi, studio di documenti magici, analisi delle fonti, storia e organizzazione delle conoscenze. possibile bibliotecario, archivista, ricercatore o studioso delle discipline magiche. club scolastico" style="--tone:#8a8da9"><div class="card-top"><span class="club-num">04 / CLUB</span><span class="club-glyph" aria-hidden="true">✦</span></div><p class="club-kind">Club scolastico</p><h3>Club del Libro</h3><p class="club-desc">Tra biblioteche, pergamene e documenti antichi, la conoscenza diventa un'avventura. Il Club valorizza lettura, ricerca e interpretazione delle fonti.</p><div class="career-tag"><span>Possibili sbocchi</span><p>Possibile bibliotecario, archivista, ricercatore o studioso delle discipline magiche.</p></div><details class="club-more"><summary>Scopri il percorso <span aria-hidden="true">＋</span></summary><div class="expanded"><h4>Cosa si studia</h4><p>Lettura e confronto di testi, studio di documenti magici, analisi delle fonti, storia e organizzazione delle conoscenze.</p><h4>Esempi di attività RP</h4><ul><li>Gruppi di lettura e discussione guidata</li><li>Ricerche sulla storia e sulle discipline magiche</li><li>Catalogazione e presentazione di documenti e appunti</li></ul><h4>Competenze da sviluppare</h4><p>Comprensione, spirito critico, capacità di ricerca, comunicazione e sintesi.</p><div class="faculty"><strong>Professore Fondatore</strong><span>Da indicare — nominativo da confermare</span></div><p class="tiny-note">Le professioni indicate sono possibilità narrative, non incarichi né titoli concessi automaticamente.</p></div></details></article><article class="club-card" data-query="club di creature magiche  comportamenti e caratteristiche delle creature magiche, habitat, esigenze, tutela e principi di osservazione responsabile. possibile magizoologo, custode di creature magiche o ricercatore nel campo della loro tutela. club scolastico" style="--tone:#7c9c87"><div class="card-top"><span class="club-num">05 / CLUB</span><span class="club-glyph" aria-hidden="true">❖</span></div><p class="club-kind">Club scolastico</p><h3>Club di Creature Magiche</h3><p class="club-desc">Conoscere significa anche rispettare. Un percorso dedicato all'osservazione delle creature, dei loro habitat e delle responsabilità di chi se ne prende cura.</p><div class="career-tag"><span>Possibili sbocchi</span><p>Possibile magizoologo, custode di creature magiche o ricercatore nel campo della loro tutela.</p></div><details class="club-more"><summary>Scopri il percorso <span aria-hidden="true">＋</span></summary><div class="expanded"><h4>Cosa si studia</h4><p>Comportamenti e caratteristiche delle creature magiche, habitat, esigenze, tutela e principi di osservazione responsabile.</p><h4>Esempi di attività RP</h4><ul><li>Ricerche e schede descrittive delle creature</li><li>Osservazioni autorizzate e discussioni sulla tutela</li><li>Progetti didattici dedicati agli habitat e alla loro salvaguardia</li></ul><h4>Competenze da sviluppare</h4><p>Pazienza, osservazione, rispetto degli esseri viventi e attenzione alla sicurezza.</p><div class="faculty"><strong>Professore Fondatore</strong><span>Da indicare — nominativo da confermare</span></div><p class="tiny-note">Le professioni indicate sono possibilità narrative, non incarichi né titoli concessi automaticamente.</p></div></details></article><article class="club-card" data-query="club di trasfigurazione  principi teorici della trasfigurazione, controllo della magia, limiti delle trasformazioni e studio delle tecniche già apprese. possibile specialista o ricercatore nelle trasformazioni magiche e in campi che richiedano padronanza della materia. club scolastico" style="--tone:#8e87bb"><div class="card-top"><span class="club-num">06 / CLUB</span><span class="club-glyph" aria-hidden="true">✺</span></div><p class="club-kind">Club scolastico</p><h3>Club di Trasfigurazione</h3><p class="club-desc">La trasformazione magica richiede precisione e rigore. Il Club approfondisce i fondamenti della disciplina con attività calibrate sul livello scolastico.</p><div class="career-tag"><span>Possibili sbocchi</span><p>Possibile specialista o ricercatore nelle trasformazioni magiche e in campi che richiedano padronanza della materia.</p></div><details class="club-more"><summary>Scopri il percorso <span aria-hidden="true">＋</span></summary><div class="expanded"><h4>Cosa si studia</h4><p>Principi teorici della Trasfigurazione, controllo della magia, limiti delle trasformazioni e studio delle tecniche già apprese.</p><h4>Esempi di attività RP</h4><ul><li>Ripassi ed esercitazioni autorizzate sulle competenze acquisite</li><li>Analisi degli errori e confronto sui risultati</li><li>Approfondimenti teorici e progetti didattici guidati</li></ul><h4>Competenze da sviluppare</h4><p>Concentrazione, precisione, disciplina e capacità di osservare le trasformazioni.</p><div class="faculty"><strong>Professore Fondatore</strong><span>Da indicare — nominativo da confermare</span></div><p class="tiny-note">Le professioni indicate sono possibilità narrative, non incarichi né titoli concessi automaticamente.</p></div></details></article><article class="club-card" data-query="club di erbologia  riconoscimento, coltivazione e conservazione delle piante magiche; proprietà, habitat, raccolta e ruolo degli ingredienti vegetali. possibile erbologo, botanico magico, coltivatore specializzato o ricercatore di piante e ingredienti vegetali. club scolastico · nuova introduzione" style="--tone:#88a879"><div class="card-top"><span class="club-num">07 / CLUB</span><span class="club-glyph" aria-hidden="true">❀</span></div><p class="club-kind">Club scolastico · nuova introduzione</p><h3>Club di Erbologia</h3><p class="club-desc">Dalle serre ai registri botanici, un viaggio nello studio delle piante magiche, nella loro coltivazione e nel loro impiego responsabile.</p><div class="career-tag"><span>Possibili sbocchi</span><p>Possibile erbologo, botanico magico, coltivatore specializzato o ricercatore di piante e ingredienti vegetali.</p></div><details class="club-more"><summary>Scopri il percorso <span aria-hidden="true">＋</span></summary><div class="expanded"><h4>Cosa si studia</h4><p>Riconoscimento, coltivazione e conservazione delle piante magiche; proprietà, habitat, raccolta e ruolo degli ingredienti vegetali.</p><h4>Esempi di attività RP</h4><ul><li>Cura delle coltivazioni e osservazioni nelle serre autorizzate</li><li>Schede botaniche e confronti sulle proprietà delle piante</li><li>Ricerche sull'impiego delle risorse vegetali in pozioni e rimedi</li></ul><h4>Competenze da sviluppare</h4><p>Cura, costanza, classificazione, osservazione e gestione responsabile delle risorse.</p><div class="faculty"><strong>Professore Fondatore</strong><span>Da indicare — nominativo da confermare</span></div><p class="tiny-note">Le professioni indicate sono possibilità narrative, non incarichi né titoli concessi automaticamente.</p></div></details></article><article class="club-card" data-query="percorso di medimagia  fondamenti delle arti curative, assistenza, osservazione, procedure e limiti di intervento previsti dall'organizzazione scolastica. possibile aspirante medimago, guaritore o professionista nel settore della medicina magica, dopo gli eventuali requisiti previsti. percorso formativo distinto dai club" style="--tone:#7daba8"><div class="card-top"><span class="club-num">08 / PERCORSO</span><span class="club-glyph" aria-hidden="true">✚</span></div><p class="club-kind">Percorso formativo distinto dai Club</p><h3>Percorso di Medimagia</h3><p class="club-desc">Una via dedicata alle arti della cura magica, con formazione specifica, responsabilità verso gli altri e attenzione al corretto intervento.</p><div class="career-tag"><span>Possibili sbocchi</span><p>Possibile aspirante Medimago, guaritore o professionista nel settore della medicina magica, dopo gli eventuali requisiti previsti.</p></div><details class="club-more"><summary>Scopri il percorso <span aria-hidden="true">＋</span></summary><div class="expanded"><h4>Cosa si studia</h4><p>Fondamenti delle arti curative, assistenza, osservazione, procedure e limiti di intervento previsti dall'organizzazione scolastica.</p><h4>Esempi di attività RP</h4><ul><li>Esercitazioni formative e simulazioni di assistenza autorizzate</li><li>Discussione di casi e principi di responsabilità nella cura</li><li>Studio del coordinamento e della comunicazione in situazioni di emergenza</li></ul><h4>Competenze da sviluppare</h4><p>Empatia, attenzione, lucidità, rispetto delle procedure e collaborazione.</p><div class="faculty"><strong>Docente di riferimento</strong><span>Da indicare — nominativo da confermare</span></div><p class="tiny-note">Le professioni indicate sono possibilità narrative, non incarichi né titoli concessi automaticamente.</p></div></details></article></div><p id="no-clubs" class="empty" hidden>Nessun percorso trovato. Prova un'altra ricerca.</p></div></section>
@@ -112,7 +69,32 @@
 <section class="section light" id="iscrizioni"><div class="shell"><div class="section-heading center"><div class="eyebrow dark">COME ENTRARE A FARNE PARTE</div><h2 class="section-title">L'iscrizione, <em>passo dopo passo</em></h2><p>L'adesione nasce in gioco. La gestione Discord conferma un'iscrizione già avvenuta in Roleplay.</p></div><ol class="steps"><li><span class="step-number">01</span><h3>Contatta il referente</h3><p>Parla <strong>in Roleplay</strong> con il Responsabile o il Vice Responsabile del Club interessato.</p></li><li><span class="step-number">02</span><h3>Esprimi interesse</h3><p>Presenta la tua motivazione e richiedi l'ammissione al percorso.</p></li><li><span class="step-number">03</span><h3>Attendi l'accettazione</h3><p>Il referente comunica l'esito in gioco e aggiorna il registro degli iscritti.</p></li><li><span class="step-number">04</span><h3>Richiedi il ruolo</h3><p>Solo dopo l'accettazione, richiedi il ruolo nel canale Discord <strong>richiesta ruoli</strong>.</p></li></ol><div class="step-callout"><strong>Ricorda:</strong> non è sufficiente scrivere un messaggio OOC o entrare in un canale Discord. Se intendi cambiare Club, serve una motivazione e l'autorizzazione dello Staff.</div></div></section>
 <section class="section night" id="organizzazione"><div class="shell"><div class="section-heading center"><div class="eyebrow">LE PERSONE DI RIFERIMENTO</div><h2 class="section-title">Ruoli e <em>responsabilità</em></h2><p>La guida didattica appartiene ai docenti. Il coordinamento ordinario può essere affidato agli studenti, senza creare autorità non previste dal regolamento.</p></div><div class="roles"><article class="role"><div class="role-mark">Ⅰ</div><span class="role-label">Guida didattica</span><h3>Professore Fondatore</h3><p>Fonda il Club, definisce finalità e attività formative, verifica la coerenza con la materia e collabora con Presidenza e Staff. Supervisiona anche senza essere presente a ogni incontro.</p></article><article class="role"><div class="role-mark">Ⅱ</div><span class="role-label">Coordinamento quotidiano</span><h3>Responsabile</h3><p>Organizza incontri, gestisce iscrizioni e registro, comunica appuntamenti e riferisce eventuali problemi. Non può imporre sanzioni arbitrarie.</p></article><article class="role"><div class="role-mark">Ⅲ</div><span class="role-label">Supporto e continuità</span><h3>Vice Responsabile</h3><p>Affianca il Responsabile, favorisce la partecipazione e ne assume le funzioni organizzative quando è assente, seguendo le indicazioni del docente.</p></article></div></div></section>
 <section class="section light" id="faq"><div class="shell faq-layout"><div class="section-heading"><div class="eyebrow dark">DOMANDE FREQUENTI</div><h2 class="section-title">Dubbi? <em>Le risposte.</em></h2><p>I chiarimenti più richiesti sul limite di iscrizione, Medimagia, gli incontri e le possibilità future dei personaggi.</p></div><div class="faq-list"><details class="faq"><summary>Posso iscrivermi a due Club con personaggi diversi?<span>＋</span></summary><p>No. Il limite è di un solo Club o percorso per persona OOC: si applica al giocatore, anche se interpreta più personaggi.</p></details><details class="faq"><summary>Medimagia è un Club?<span>＋</span></summary><p>È un percorso formativo distinto dai Club tradizionali, ma occupa l'unica iscrizione disponibile. Chi sceglie Medimagia non può iscriversi a un altro Club.</p></details><details class="faq"><summary>Il Club DCAO mi rende automaticamente Auror?<span>＋</span></summary><p>No. Può orientare il personaggio verso la carriera da Auror, ma per accedervi serviranno gli eventuali requisiti e le selezioni stabiliti dal server.</p></details><details class="faq"><summary>Posso cambiare Club?<span>＋</span></summary><p>Un cambio deve essere motivato e autorizzato dallo Staff. Non sono ammessi cambi ripetuti per ottenere vantaggi da più Club.</p></details><details class="faq"><summary>Posso assistere a un evento di un Club diverso dal mio?<span>＋</span></summary><p>Sì, se è un evento aperto al pubblico e non comporta una seconda iscrizione o l'accesso a benefici esclusivi.</p></details><details class="faq"><summary>Devo essere in un Club per diplomarmi?<span>＋</span></summary><p>No. I Club sono facoltativi, integrano la formazione ordinaria e non costituiscono un requisito per il diploma.</p></details><details class="faq"><summary>Chi decide le attività dei Club?<span>＋</span></summary><p>Il Professore Fondatore definisce indirizzo e supervisione didattica; Responsabile e Vice Responsabile coordinano le attività quotidiane. Le iniziative particolari richiedono le autorizzazioni previste.</p></details><details class="faq"><summary>Come si entra ufficialmente in un Club?<span>＋</span></summary><p>Contatta il Responsabile o Vice Responsabile in Roleplay; dopo l'accettazione richiedi il ruolo nel canale Discord dedicato alla richiesta ruoli.</p></details><details class="faq"><summary>Un Club mi insegna incantesimi che non conosco?<span>＋</span></summary><p>No. Le esercitazioni devono rispettare gli insegnamenti ricevuti e le competenze del personaggio. L'iscrizione non sblocca automaticamente nuove magie.</p></details><details class="faq"><summary>Chi applica le sanzioni?<span>＋</span></summary><p>Lo Staff valuta i provvedimenti. I referenti del Club possono segnalare episodi, ma non inventare sanzioni o attribuirsi poteri ulteriori.</p></details></div></div></section></main>
-<footer class="footer"><div class="shell"><div class="footer-upper"><a class="brand" href="#inizio"><span class="brand-mark">H</span><span><strong class="brand-title">HOGWARTS</strong><small class="brand-caption">CLUB SCOLASTICI · NIGHTFALL RP</small></span></a><div class="footer-links"><a href="#club">Percorsi</a><a href="#futuro">Dopo il diploma</a><a href="#regolamento">Regolamento</a><a href="#faq">FAQ</a></div></div><div class="footer-bottom"><span>La Presidenza di Hogwarts · In collaborazione con il Corpo Docenti e lo Staff di Nightfall RP</span><span>Ambientazione: 1890 · Aggiornamento: novembre 2026</span></div><div class="glossary"><span><strong>RP:</strong> Roleplay, attività svolte in gioco.</span><span><strong>OOC:</strong> Out of Character, riferito alla persona che gioca.</span></div></div></footer><button id="to-top" class="to-top" aria-label="Torna in cima">↑</button><script>
+<footer class="footer"><div class="shell"><div class="footer-upper"><a class="brand" href="#inizio"><span class="brand-mark">H</span><span><strong class="brand-title">HOGWARTS</strong><small class="brand-caption">CLUB SCOLASTICI · NIGHTFALL RP</small></span></a><div class="footer-links"><a href="#club">Percorsi</a><a href="#futuro">Dopo il diploma</a><a href="#regolamento">Regolamento</a><a href="#faq">FAQ</a></div></div><div class="footer-bottom"><span>La Presidenza di Hogwarts · In collaborazione con il Corpo Docenti e lo Staff di Nightfall RP</span><span>Ambientazione: 1890 · Aggiornamento: novembre 2026</span></div><div class="glossary"><span><strong>RP:</strong> Roleplay, attività svolte in gioco.</span><span><strong>OOC:</strong> Out of Character, riferito alla persona che gioca.</span></div></div></footer><button id="to-top" class="to-top" aria-label="Torna in cima">↑</button>
+<dialog id="protectedEditor" class="admin-dialog" aria-labelledby="adminTitle">
+ <div class="admin-hd"><div><span class="eyebrow">PRESIDENZA DI HOGWARTS · NIGHTFALL RP</span><h2 id="adminTitle">Gestisci pagina</h2></div><button id="adminClose" type="button" class="admin-close" aria-label="Chiudi">×</button></div>
+ <div class="admin-content">
+  <section id="adminGate" class="admin-login">
+   <h3 class="section-title" style="font-size:37px">Accesso <em>riservato</em></h3>
+   <p>Inserisci la stessa password utilizzata per <strong>Gestisci regolamento</strong>. La password è verificata dal servizio protetto e non è inserita nel codice della pagina.</p>
+   <form id="adminLogin"><label>Password di gestione<input id="adminPassword" type="password" maxlength="256" autocomplete="current-password" placeholder="Password" required></label><button class="admin-btn" id="adminLoginBtn" type="submit">Accedi alla gestione ↗</button></form>
+   <p id="adminLoginStatus" class="admin-status" role="status"></p>
+  </section>
+  <section id="adminEditor" class="admin-hidden">
+   <div class="admin-caution"><strong>Modifica tutti i testi:</strong> puoi aggiornare titoli, sottotitoli, avvisi, descrizioni, schede dei Club, nomi dei Professori Fondatori, articoli, domande frequenti, pulsanti e footer. Le modifiche sono visibili in anteprima solo a te finché non premi <strong>Pubblica online</strong>. Il salvataggio pubblica direttamente sul repository GitHub, senza download manuali.</div>
+   <div class="admin-panel-head"><div><h3>Testi della pagina</h3><small>Seleziona una sezione o cerca una frase per modificarla.</small></div><button id="adminLogout" type="button" class="admin-btn secondary">Esci dalla gestione</button></div>
+   <div class="admin-settings"><h4>Impostazioni della pagina (SEO)</h4><div class="admin-setting-grid"><label>Titolo della scheda del browser<input id="adminSeoTitle" maxlength="220"></label><label>Descrizione per i motori di ricerca<input id="adminSeoDescription" maxlength="600"></label></div></div>
+   <div class="admin-toolbar"><input id="adminSearch" class="admin-search" type="search" placeholder="Cerca parole, Club, professori, articoli..." aria-label="Cerca un testo"><select class="admin-filter" id="adminSection" aria-label="Filtra per sezione"><option value="all">Tutta la pagina</option><option value="header">Navigazione</option><option value="inizio">Homepage</option><option value="notice">Avviso sul limite</option><option value="club">Club e fondatori</option><option value="futuro">Professioni e futuro</option><option value="regolamento">Regolamento (12 articoli)</option><option value="iscrizioni">Iscrizioni</option><option value="organizzazione">Organizzazione</option><option value="faq">Domande frequenti</option><option value="footer">Footer</option></select></div>
+   <div id="adminCount" class="admin-page-count" role="status"></div>
+   <div id="adminTextList" class="admin-text-list"></div>
+   <div class="admin-pages"><span id="adminPageInfo"></span><div><button class="admin-btn secondary" type="button" id="adminPrev">← Precedenti</button> <button class="admin-btn secondary" type="button" id="adminNext">Successivi →</button></div></div>
+   <div class="admin-bottom"><div><button id="adminPublish" class="admin-btn" type="button">Pubblica online su GitHub ↗</button> <button id="adminDiscard" class="admin-btn danger" type="button">Scarta modifiche</button></div><span id="adminUnsaved" class="admin-unsaved">Nessuna modifica in sospeso</span></div>
+   <p class="admin-note">La password rimane solo nella memoria della sessione corrente. La pubblicazione richiede che la pagina e il servizio protetto siano raggiungibili; se un altro amministratore modifica contemporaneamente i contenuti, ti verrà richiesto di ricaricarli per evitare sovrascritture.</p>
+   <p id="adminEditorStatus" class="admin-status" role="status"></p>
+  </section>
+ </div>
+</dialog>
+
+<script>
 (function(){
  const search=document.getElementById('club-search'),cards=[...document.querySelectorAll('.club-card')],count=document.getElementById('club-count'),none=document.getElementById('no-clubs');
  function filter(){const term=search.value.trim().toLocaleLowerCase('it');let shown=0;cards.forEach(card=>{const show=card.dataset.query.includes(term);card.hidden=!show;if(show)shown++;});count.textContent=shown+' percorsi visibili su '+cards.length;none.hidden=shown!==0;}
@@ -123,164 +105,239 @@
  document.querySelectorAll('a[href^="#art-"]').forEach(a=>a.addEventListener('click',()=>{const target=document.querySelector(a.getAttribute('href'));if(target)target.open=true;}));
  document.getElementById('to-top').addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
 })();
-</script><script>
+</script>
+<script>
 
 (function(){
  "use strict";
  const $=id=>document.getElementById(id);
- const cards=[...document.querySelectorAll(".club-card")],rules=[...document.querySelectorAll("details.rule")],faqs=[...document.querySelectorAll("details.faq")];
- const storageKey="nightfall-clubs-editor-v1";
- const cardsSnapshot=()=>{
-  return cards.map(card=>{
-   const texts=card.querySelectorAll(".expanded > p:not(.tiny-note)");
-   return {
-    name:card.querySelector("h3").textContent,
-    founder:card.querySelector(".faculty span").textContent,
-    desc:card.querySelector(".club-desc").textContent,
-    focus:texts[0]?.textContent||"",
-    activities:[...card.querySelectorAll(".expanded ul li")].map(x=>x.textContent),
-    skills:texts[1]?.textContent||"",
-    future:card.querySelector(".career-tag p").textContent
-   };
-  });
- };
- const snapshot=()=>({
-  version:1,
-  clubs:cardsSnapshot(),
-  rules:rules.map((rule,index)=>({title:rule.querySelector("summary span:nth-child(2)").textContent.replace(new RegExp("^Art\\. "+(index+1)+" — "),""),
-   paragraphs:[...rule.querySelectorAll(".rule-body p")].map(p=>p.textContent)})),
-  faqs:faqs.map(faq=>({question:faq.querySelector("summary").firstChild.textContent.trim(),answer:faq.querySelector("p").textContent}))
- });
- function setClub(index,value){
-  const card=cards[index];if(!card||!value)return;
-  const set=(selector,text)=>{const x=card.querySelector(selector);if(x&&typeof text==="string")x.textContent=text};
-  set("h3",value.name);set(".club-desc",value.desc);set(".career-tag p",value.future);set(".faculty span",value.founder);
-  const p=card.querySelectorAll(".expanded > p:not(.tiny-note)");
-  if(p[0]&&typeof value.focus==="string")p[0].textContent=value.focus;
-  if(p[1]&&typeof value.skills==="string")p[1].textContent=value.skills;
-  if(Array.isArray(value.activities)){
-   const ul=card.querySelector(".expanded ul");ul.replaceChildren();
-   for(const text of value.activities.filter(x=>typeof x==="string"&&x.trim())){
-    const li=document.createElement("li");li.textContent=text.trim();ul.append(li);
+ const dialog=$("protectedEditor"),gate=$("adminGate"),editor=$("adminEditor");
+ const editables=[];
+ const sections=[["header","Navigazione"],["inizio","Homepage"],["notice","Avviso"],["club","Club e fondatori"],["futuro","Professioni dopo il diploma"],["regolamento","Regolamento"],["iscrizioni","Iscrizioni"],["organizzazione","Organizzazione"],["faq","FAQ"],["footer","Footer"]];
+ const sectionNames=Object.fromEntries(sections);
+ const nativeTitle=document.title,nativeDescription=document.querySelector('meta[name="description"]')?.content||"";
+ let apiUrl="",pass=null,remoteSha=null,basePage=null,currentPage=null,busy=false,editorPage=0,filtered=[];
+ const PAGE_SIZE=20;
+ const blankPage=()=>({version:1,texts:{},meta:{title:nativeTitle,description:nativeDescription}});
+ function copy(v){return JSON.parse(JSON.stringify(v));}
+ function getSection(node){
+  const parent=node.parentElement;
+  if(parent.closest("header.header"))return "header";
+  if(parent.closest(".notice"))return "notice";
+  if(parent.closest("footer.footer"))return "footer";
+  return parent.closest("section[id]")?.id||"inizio";
+ }
+ const roots=[document.querySelector("header.header"),document.querySelector(".notice"),document.getElementById("main"),document.querySelector("footer.footer")].filter(Boolean);
+ for(const root of roots){
+  const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{
+   acceptNode(node){
+    const text=node.nodeValue.trim(),parent=node.parentElement;
+    if(!text||!/[0-9A-Za-zÀ-ÿ]/.test(text)||!parent)return NodeFilter.FILTER_REJECT;
+    if(parent.closest("script,style,.admin-open,#club-count,.club-glyph,.path-icon,.path-arrow,.rule-number,.club-num,.role-mark,.step-number,.brand-mark,.ornament"))return NodeFilter.FILTER_REJECT;
+    if(parent.closest(".rule-plus,.club-more summary span,.faq summary span"))return NodeFilter.FILTER_REJECT;
+    return NodeFilter.FILTER_ACCEPT;
    }
-  }
-  const career=document.querySelectorAll(".pathway")[index];
-  if(career){const cp=career.querySelector("p");if(cp)cp.textContent=value.future;const title=career.querySelector("strong");if(title&&index!==2)title.textContent=value.name;}
-  const all=[value.name,value.desc,value.focus,value.skills,value.future,card.querySelector(".club-kind")?.textContent||"",...(value.activities||[])];
-  card.dataset.query=all.join(" ").toLocaleLowerCase("it");
- }
- function setRule(index,value){
-  const rule=rules[index];if(!rule||!value)return;
-  const title=String(value.title||"").trim();if(!title)return;
-  rule.querySelector("summary span:nth-child(2)").textContent="Art. "+(index+1)+" — "+title;
-  const a=document.querySelector('.rule-sidebar a[href="#art-'+(index+1)+'"]');
-  if(a&&a.lastChild)a.lastChild.textContent=title;
-  const container=rule.querySelector(".rule-body");
-  container.replaceChildren();
-  for(const line of value.paragraphs||[]){
-   if(typeof line!=="string"||!line.trim())continue;
-   const p=document.createElement("p");p.textContent=line.trim();container.append(p);
+  });
+  while(walker.nextNode()){
+   const node=walker.currentNode,raw=node.nodeValue;
+   const prefix=(raw.match(/^\s*/)||[""])[0],suffix=(raw.match(/\s*$/)||[""])[0];
+   const section=getSection(node);
+   const club=node.parentElement.closest(".club-card");
+   const rule=node.parentElement.closest(".rule");
+   const faq=node.parentElement.closest(".faq");
+   const clubName=club?.querySelector("h3")?.textContent||"";
+   let context=sectionNames[section]||section;
+   if(clubName)context+=" · "+clubName;
+   if(rule)context+=" · Articolo "+(Array.from(document.querySelectorAll(".rule")).indexOf(rule)+1);
+   if(faq)context+=" · Domanda "+(Array.from(document.querySelectorAll(".faq")).indexOf(faq)+1);
+   if(node.parentElement.closest(".faculty"))context+=" · Professore Fondatore";
+   editables.push({key:"t"+String(editables.length).padStart(4,"0"),node,original:raw.trim(),prefix,suffix,section,context});
   }
  }
- function setFaq(index,value){
-  const faq=faqs[index];if(!faq||!value)return;
-  if(typeof value.question==="string")faq.querySelector("summary").firstChild.textContent=value.question;
-  if(typeof value.answer==="string")faq.querySelector("p").textContent=value.answer;
+ const getText=item=>item.node.nodeValue.trim();
+ function setText(item,value){
+  item.node.nodeValue=item.prefix+value+item.suffix;
+  const card=item.node.parentElement.closest(".club-card");
+  if(card)card.dataset.query=card.textContent.toLocaleLowerCase("it");
  }
- function updateDraft(){
-  try{localStorage.setItem(storageKey,JSON.stringify(snapshot()));$("localDraft").hidden=false;$("adminStatus").textContent="Modifiche salvate nella bozza di questo browser. Per pubblicare online scarica index.html e sostituiscilo su GitHub."}
-  catch(error){$("adminStatus").textContent="Modifiche visibili in questa sessione, ma impossibile conservarle nel browser: "+error.message;}
+ function validPage(p){return p&&p.version===1&&typeof p.texts==="object"&&!Array.isArray(p.texts)&&typeof p.meta==="object";}
+ function applyPage(page){
+  const patch=page?.texts||{};
+  editables.forEach(item=>{
+   const changed=Object.prototype.hasOwnProperty.call(patch,item.key)?patch[item.key]:item.original;
+   setText(item,typeof changed==="string"?changed:item.original);
+  });
+  document.title=typeof page?.meta?.title==="string"?page.meta.title:nativeTitle;
+  const description=document.querySelector('meta[name="description"]');
+  if(description)description.content=typeof page?.meta?.description==="string"?page.meta.description:nativeDescription;
+  if(editor.classList.contains("admin-hidden"))return;
+  $("adminSeoTitle").value=document.title;$("adminSeoDescription").value=description?.content||"";
  }
- function restore(){
+ function setStatus(message,target="adminEditorStatus"){$(target).textContent=message;}
+ function buildCurrent(){
+  const texts={};
+  for(const item of editables){
+   const val=getText(item);
+   if(val!==item.original)texts[item.key]=val;
+  }
+  return {version:1,texts,meta:{title:$("adminSeoTitle").value.trim()||nativeTitle,description:$("adminSeoDescription").value.trim()}};
+ }
+ function dirty(){
+  return !!basePage&&JSON.stringify(buildCurrent())!==JSON.stringify(basePage);
+ }
+ function refreshState(){
+  $("adminUnsaved").textContent=dirty()?"Modifiche non ancora pubblicate":"Nessuna modifica in sospeso";
+  $("adminPublish").disabled=busy||!dirty();
+ }
+ function sectionSearch(){
+  const filter=$("adminSection").value,term=$("adminSearch").value.trim().toLocaleLowerCase("it");
+  filtered=editables.filter(item=>{
+   const text=getText(item);
+   return (filter==="all"||item.section===filter)&&(!term||[text,item.original,item.context].join(" ").toLocaleLowerCase("it").includes(term));
+  });
+  editorPage=0;renderFields();
+ }
+ function renderFields(){
+  const list=$("adminTextList");list.replaceChildren();
+  const length=filtered.length,max=Math.ceil(length/PAGE_SIZE)||1;editorPage=Math.max(0,Math.min(editorPage,max-1));
+  const slice=filtered.slice(editorPage*PAGE_SIZE,(editorPage+1)*PAGE_SIZE);
+  slice.forEach(item=>{
+   const wrap=document.createElement("div");wrap.className="admin-text-item";
+   const label=document.createElement("label");label.textContent=item.context+" · "+(item.original.slice(0,100)||"Testo");label.htmlFor="f-"+item.key;
+   const textarea=document.createElement("textarea");textarea.id="f-"+item.key;textarea.maxLength=10000;textarea.value=getText(item);
+   textarea.rows=Math.min(7,Math.max(2,Math.ceil(textarea.value.length/90)));
+   const note=document.createElement("small");note.textContent="Testo originale: "+item.original.slice(0,150)+(item.original.length>150?"…":"");
+   textarea.addEventListener("input",()=>{
+    setText(item,textarea.value);
+    textarea.setAttribute("aria-label",item.context);
+    refreshState();
+   });
+   wrap.append(label,textarea,note);list.append(wrap);
+  });
+  $("adminCount").textContent=length+" testi trovati · "+editables.length+" campi di testo modificabili";
+  $("adminPageInfo").textContent="Pagina "+(editorPage+1)+" di "+max;
+  $("adminPrev").disabled=editorPage===0;
+  $("adminNext").disabled=editorPage+1>=max;
+ }
+ async function loadConfig(){
+  if(apiUrl)return apiUrl;
+  const res=await fetch("../config.json",{cache:"no-store"});
+  if(!res.ok)throw new Error("Configurazione del servizio di gestione non trovata.");
+  const cfg=await res.json();const url=new URL(cfg.apiUrl);
+  if(url.protocol!=="https:"||url.username||url.password||url.search||url.hash)throw new Error("Indirizzo del servizio non valido.");
+  apiUrl=url.href.replace(/\/+$/,"");return apiUrl;
+ }
+ function encodePassword(value){
+  const bytes=new TextEncoder().encode(value);let binary="";
+  for(let i=0;i<bytes.length;i+=8192)binary+=String.fromCharCode(...bytes.subarray(i,i+8192));
+  return btoa(binary);
+ }
+ async function api(path,method="GET",body,password=pass){
+  await loadConfig();
+  const headers={"Accept":"application/json"};
+  if(password!==null)headers.Authorization="Bearer "+encodePassword(password);
+  if(body!==undefined)headers["Content-Type"]="application/json";
+  const res=await fetch(apiUrl+path,{method,headers,body:body===undefined?undefined:JSON.stringify(body),cache:"no-store"});
+  let data={};try{data=await res.json()}catch{}
+  if(!res.ok){const error=new Error(data.error||"Servizio di gestione non raggiungibile.");error.status=res.status;throw error;}
+  return data;
+ }
+ async function fetchRemote(){
+  const data=await api("/api/document","GET");
+  if(!data.document||!data.sha)throw new Error("Impossibile leggere il documento protetto.");
+  return data;
+ }
+ function cleanPage(obj){
+  if(!validPage(obj))return blankPage();
+  const texts={};
+  for(const [key,value] of Object.entries(obj.texts)){
+   if(/^t\d{4}$/.test(key)&&typeof value==="string")texts[key]=value;
+  }
+  return {version:1,texts,meta:{title:typeof obj.meta.title==="string"?obj.meta.title:nativeTitle,description:typeof obj.meta.description==="string"?obj.meta.description:nativeDescription}};
+ }
+ async function loadPublic(){
   try{
-   const raw=localStorage.getItem(storageKey);if(!raw)return;
-   const data=JSON.parse(raw);
-   if(data.version!==1||data.clubs?.length!==cards.length||data.rules?.length!==rules.length||data.faqs?.length!==faqs.length)return;
-   data.clubs.forEach((item,i)=>setClub(i,item));
-   data.rules.forEach((item,i)=>setRule(i,item));
-   data.faqs.forEach((item,i)=>setFaq(i,item));
-   $("localDraft").hidden=false;
-  }catch(err){console.warn("Bozza non ripristinabile:",err);}
+   const res=await fetch("../regolamento.json?ts="+Date.now(),{cache:"no-store"});
+   if(!res.ok)return;
+   const content=await res.json();
+   applyPage(cleanPage(content.clubsPage||blankPage()));
+  }catch(error){console.warn("Club: contenuti pubblici predefiniti.",error);}
  }
- const dialog=$("adminDialog");
- function populateSelect(select,items,getLabel){select.replaceChildren();items.forEach((item,i)=>{const opt=document.createElement("option");opt.value=String(i);opt.textContent=getLabel(item,i);select.append(opt)});}
- function fillClubs(){
-  const i=Number($("admClubSelect").value)||0,c=cardsSnapshot()[i];
-  $("admClubName").value=c.name;$("admClubFounder").value=c.founder;
-  $("admClubDesc").value=c.desc;$("admClubFocus").value=c.focus;
-  $("admClubActivities").value=c.activities.join("\n");
-  $("admClubSkills").value=c.skills;$("admClubFuture").value=c.future;
- }
- function fillRules(){
-  const i=Number($("admRuleSelect").value)||0,r=snapshot().rules[i];
-  $("admRuleTitle").value=r.title;$("admRuleText").value=r.paragraphs.join("\n\n");
- }
- function fillFaqs(){
-  const i=Number($("admFaqSelect").value)||0,f=snapshot().faqs[i];
-  $("admFaqQuestion").value=f.question;$("admFaqAnswer").value=f.answer;
- }
- function selects(){
-  populateSelect($("admClubSelect"),cards,card=>card.querySelector("h3").textContent);
-  populateSelect($("admRuleSelect"),rules,(rule,i)=>"Art. "+(i+1)+" — "+rule.querySelector("summary span:nth-child(2)").textContent.replace(/^Art\. \d+ — /,""));
-  populateSelect($("admFaqSelect"),faqs,faq=>faq.querySelector("summary").firstChild.textContent.trim());
-  fillClubs();fillRules();fillFaqs();
- }
- function showTab(type){
-  for(const button of document.querySelectorAll("[data-admin-tab]"))button.setAttribute("aria-selected",String(button.dataset.adminTab===type));
-  for(const panel of document.querySelectorAll("[data-admin-panel]"))panel.hidden=panel.dataset.adminPanel!==type;
-  $("adminStatus").textContent="";
- }
- restore();
- $("openAdmin").addEventListener("click",()=>{
-  selects();showTab("club");dialog.showModal();
-  $("nav").classList.remove("open");$("menu").setAttribute("aria-expanded","false");$("menu").textContent="Menu ☰";
+ loadPublic();
+ $("managePageBtn").addEventListener("click",()=>{
+  dialog.showModal();
+  gate.classList.toggle("admin-hidden",!!pass);
+  editor.classList.toggle("admin-hidden",!pass);
+  $("adminPassword").value="";setStatus("","adminLoginStatus");
+  if(pass){sectionSearch();refreshState();}
+  document.getElementById("nav").classList.remove("open");$("menu").setAttribute("aria-expanded","false");$("menu").textContent="Menu ☰";
  });
  $("adminClose").addEventListener("click",()=>dialog.close());
- dialog.addEventListener("click",e=>{if(e.target===dialog)dialog.close()});
- document.querySelectorAll("[data-admin-tab]").forEach(b=>b.addEventListener("click",()=>showTab(b.dataset.adminTab)));
- $("admClubSelect").addEventListener("change",fillClubs);
- $("admRuleSelect").addEventListener("change",fillRules);
- $("admFaqSelect").addEventListener("change",fillFaqs);
- $("adminClubForm").addEventListener("submit",event=>{
-  event.preventDefault();
-  const index=Number($("admClubSelect").value);
-  setClub(index,{
-   name:$("admClubName").value.trim(),founder:$("admClubFounder").value.trim()||"Da indicare — nominativo da confermare",
-   desc:$("admClubDesc").value.trim(),focus:$("admClubFocus").value.trim(),
-   activities:$("admClubActivities").value.split(/\r?\n/).map(v=>v.trim()).filter(Boolean),
-   skills:$("admClubSkills").value.trim(),future:$("admClubFuture").value.trim()
-  });
-  updateDraft();selects();$("admClubSelect").value=String(index);fillClubs();
-  $("club-search").dispatchEvent(new Event("input"));
+ $("adminLogin").addEventListener("submit",async e=>{
+  e.preventDefault();if(busy)return;
+  const candidate=$("adminPassword").value;if(!candidate)return;
+  busy=true;$("adminLoginBtn").disabled=true;setStatus("Verifica della password in corso…","adminLoginStatus");
+  try{
+   await api("/api/login","POST",undefined,candidate);
+   const result=await api("/api/document","GET",undefined,candidate);
+   remoteSha=result.sha;
+   pass=candidate;
+   basePage=cleanPage(result.document.clubsPage||blankPage());
+   currentPage=copy(basePage);
+   applyPage(basePage);
+   gate.classList.add("admin-hidden");editor.classList.remove("admin-hidden");
+   $("adminSeoTitle").value=document.title;
+   $("adminSeoDescription").value=document.querySelector('meta[name="description"]')?.content||"";
+   $("adminSection").value="all";$("adminSearch").value="";
+   sectionSearch();refreshState();setStatus("Accesso riuscito. Le modifiche saranno pubblicate soltanto quando premi «Pubblica online». ");
+  }catch(error){pass=null;setStatus(error.status===401?"Password errata.":error.message,"adminLoginStatus")}
+  finally{busy=false;$("adminLoginBtn").disabled=false;$("adminPassword").value=""}
  });
- $("adminRuleForm").addEventListener("submit",event=>{
-  event.preventDefault();const index=Number($("admRuleSelect").value);
-  const text=$("admRuleText").value.trim().split(/\n\s*\n/).map(v=>v.trim()).filter(Boolean);
-  if(!text.length){$("adminStatus").textContent="Inserisci almeno un paragrafo.";return;}
-  setRule(index,{title:$("admRuleTitle").value.trim(),paragraphs:text});
-  updateDraft();selects();$("admRuleSelect").value=String(index);fillRules();
+ $("adminLogout").addEventListener("click",()=>{
+  if(dirty()&&!confirm("Vuoi uscire senza pubblicare le modifiche?"))return;
+  if(basePage)applyPage(basePage);pass=null;remoteSha=null;basePage=null;currentPage=null;
+  gate.classList.remove("admin-hidden");editor.classList.add("admin-hidden");
+  dialog.close();setStatus("");
  });
- $("adminFaqForm").addEventListener("submit",event=>{
-  event.preventDefault();const index=Number($("admFaqSelect").value);
-  setFaq(index,{question:$("admFaqQuestion").value.trim(),answer:$("admFaqAnswer").value.trim()});
-  updateDraft();selects();$("admFaqSelect").value=String(index);fillFaqs();
+ $("adminSearch").addEventListener("input",sectionSearch);
+ $("adminSection").addEventListener("change",sectionSearch);
+ $("adminPrev").addEventListener("click",()=>{editorPage--;renderFields()});
+ $("adminNext").addEventListener("click",()=>{editorPage++;renderFields()});
+ $("adminSeoTitle").addEventListener("input",()=>{document.title=$("adminSeoTitle").value;refreshState()});
+ $("adminSeoDescription").addEventListener("input",()=>{const el=document.querySelector('meta[name="description"]');if(el)el.content=$("adminSeoDescription").value;refreshState()});
+ $("adminDiscard").addEventListener("click",()=>{
+  if(!basePage)return;
+  if(dirty()&&!confirm("Vuoi scartare tutte le modifiche non pubblicate?"))return;
+  applyPage(basePage);refreshState();renderFields();setStatus("Tutte le modifiche locali sono state scartate.");
  });
- $("adminReset").addEventListener("click",()=>{
-  if(!confirm("Scartare tutte le modifiche salvate in questo browser e ricaricare la pagina pubblicata?"))return;
-  try{localStorage.removeItem(storageKey)}catch{} location.reload();
+ $("adminPublish").addEventListener("click",async()=>{
+  if(busy||!pass||!basePage)return;
+  if(!dirty()){setStatus("Nessuna modifica da pubblicare.");return}
+  if(!confirm("Pubblicare tutti i testi aggiornati sul sito dei Club tramite GitHub?"))return;
+  busy=true;refreshState();setStatus("Controllo della versione e pubblicazione su GitHub in corso…");
+  try{
+   const remote=await fetchRemote();
+   const remotePage=cleanPage(remote.document.clubsPage||blankPage());
+   if(JSON.stringify(remotePage)!==JSON.stringify(basePage)){
+    throw new Error("Il sito dei Club è stato modificato da un altro amministratore. Scarta le modifiche, esci e accedi di nuovo per caricare la versione aggiornata.");
+   }
+   const replacement=copy(remote.document);
+   replacement.clubsPage=buildCurrent();
+   replacement.updatedAt=new Date().toISOString().slice(0,10);
+   const result=await api("/api/document","PUT",{document:replacement,sha:remote.sha});
+   remoteSha=result.sha;
+   basePage=cleanPage(replacement.clubsPage);
+   currentPage=copy(basePage);
+   refreshState();
+   setStatus("Modifiche pubblicate su GitHub. GitHub Pages potrebbe impiegare qualche minuto per mostrarle sul sito pubblico.");
+  }catch(error){
+   if(error.status===401||error.status===403){
+    setStatus("Sessione non autorizzata: esci e accedi nuovamente con la password.");
+   }else setStatus("Pubblicazione non riuscita: "+error.message);
+  }finally{busy=false;refreshState()}
  });
- $("adminDownload").addEventListener("click",()=>{
-  const clone=document.documentElement.cloneNode(true);
-  const draft=clone.querySelector("#localDraft");if(draft)draft.hidden=true;
-  const dlg=clone.querySelector("#adminDialog");if(dlg)dlg.removeAttribute("open");
-  const menu=clone.querySelector("#nav");if(menu)menu.classList.remove("open");
-  clone.querySelectorAll(".club-card").forEach(card=>card.removeAttribute("hidden"));
-  clone.querySelectorAll("details.rule").forEach((rule,i)=>{if(i===0)rule.setAttribute("open","");else rule.removeAttribute("open")});
-  const code="<!doctype html>\n"+clone.outerHTML;
-  const url=URL.createObjectURL(new Blob([code],{type:"text/html;charset=utf-8"}));
-  const link=document.createElement("a");link.href=url;link.download="index.html";document.body.append(link);link.click();link.remove();
-  setTimeout(()=>URL.revokeObjectURL(url),2500);
-  $("adminStatus").textContent="File index.html pronto. Ora sostituiscilo nel repository GitHub per pubblicare le modifiche.";
+ window.addEventListener("beforeunload",event=>{
+  if(pass&&dirty()){event.preventDefault();event.returnValue=""}
  });
 })();
 
