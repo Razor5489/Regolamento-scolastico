@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-16",
+  "updatedAt": "2026-11-18",
   "school": "Scuola di Magia e Stregoneria di Hogwarts",
   "era": "Anno 1890",
   "preface": "Il ruolo di professore non si limita all’insegnamento di una materia, ma comprende la responsabilità di contribuire attivamente alla crescita degli studenti e alla qualità del Roleplay all’interno di Hogwarts. Ogni docente è tenuto a seguire le presenti disposizioni, garantendo serietà, collaborazione e rispetto nei confronti degli studenti e dei colleghi.",
@@ -573,7 +573,9 @@
   ],
   "clubsPage": {
     "version": 1,
-    "texts": {},
+    "texts": {
+      "t0032": "Sette Club tradizionali e un percorso formativo dedicato alle arti. Ogni scheda spiega cosa si studia, quali attività si possono svolgere e quali strade future potrebbe ispirare il singolo studente."
+    },
     "meta": {
       "title": "Club Scolastici di Hogwarts | Nightfall RP",
       "description": "Portale dei Club Scolastici di Hogwarts — Nightfall RP. Scopri Pozioni, Duelli, DCAO, Libro, Creature Magiche, Trasfigurazione, Erbologia e Medimagia. Regolamento completo, iscrizioni e possibili professioni dopo il diploma."
