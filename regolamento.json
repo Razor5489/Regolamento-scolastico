@@ -570,5 +570,13 @@
         }
       ]
     }
-  ]
+  ],
+  "clubsPage": {
+    "version": 1,
+    "texts": {},
+    "meta": {
+      "title": "Club Scolastici di Hogwarts | Nightfall RP",
+      "description": "Portale dei Club Scolastici di Hogwarts — Nightfall RP. Scopri Pozioni, Duelli, DCAO, Libro, Creature Magiche, Trasfigurazione, Erbologia e Medimagia. Regolamento completo, iscrizioni e possibili professioni dopo il diploma."
+    }
+  }
 }
