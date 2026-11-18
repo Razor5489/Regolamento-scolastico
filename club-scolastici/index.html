@@ -237,7 +237,9 @@
  const getText=item=>item.node.nodeValue.trim();
  function setText(item,value){
   item.node.nodeValue=item.prefix+value+item.suffix;
-  const card=item.node.parentElement?.closest(".club-card");
+  const parent=item.node.parentElement;
+  if(parent?.matches(".registry-name"))parent.classList.toggle("placeholder",!String(value).trim()||String(value).trim().toLocaleLowerCase("it")==="da assegnare");
+  const card=parent?.closest(".club-card");
   if(card)card.dataset.query=card.textContent.toLocaleLowerCase("it");
  }
  function validPage(p){return p&&p.version===1&&typeof p.texts==="object"&&!Array.isArray(p.texts)&&typeof p.meta==="object";}
