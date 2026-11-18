@@ -122,6 +122,7 @@
  function copy(v){return JSON.parse(JSON.stringify(v));}
  function getSection(node){
   const parent=node.parentElement;
+  if(!parent)return "inizio";
   if(parent.closest("header.header"))return "header";
   if(parent.closest(".notice"))return "notice";
   if(parent.closest("footer.footer"))return "footer";
@@ -142,22 +143,24 @@
    const node=walker.currentNode,raw=node.nodeValue;
    const prefix=(raw.match(/^\s*/)||[""])[0],suffix=(raw.match(/\s*$/)||[""])[0];
    const section=getSection(node);
-   const club=node.parentElement.closest(".club-card");
-   const rule=node.parentElement.closest(".rule");
-   const faq=node.parentElement.closest(".faq");
+   const parent=node.parentElement;
+   if(!parent)continue;
+   const club=parent.closest(".club-card");
+   const rule=parent.closest(".rule");
+   const faq=parent.closest(".faq");
    const clubName=club?.querySelector("h3")?.textContent||"";
    let context=sectionNames[section]||section;
    if(clubName)context+=" · "+clubName;
    if(rule)context+=" · Articolo "+(Array.from(document.querySelectorAll(".rule")).indexOf(rule)+1);
    if(faq)context+=" · Domanda "+(Array.from(document.querySelectorAll(".faq")).indexOf(faq)+1);
-   if(node.parentElement.closest(".faculty"))context+=" · Professore Fondatore";
+   if(parent.closest(".faculty"))context+=" · Professore Fondatore";
    editables.push({key:"t"+String(editables.length).padStart(4,"0"),node,original:raw.trim(),prefix,suffix,section,context});
   }
  }
  const getText=item=>item.node.nodeValue.trim();
  function setText(item,value){
   item.node.nodeValue=item.prefix+value+item.suffix;
-  const card=item.node.parentElement.closest(".club-card");
+  const card=item.node.parentElement?.closest(".club-card");
   if(card)card.dataset.query=card.textContent.toLocaleLowerCase("it");
  }
  function validPage(p){return p&&p.version===1&&typeof p.texts==="object"&&!Array.isArray(p.texts)&&typeof p.meta==="object";}
