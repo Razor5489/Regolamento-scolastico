@@ -15,6 +15,13 @@ function valid(doc){
   if(Object.keys(doc.teachers).length>40)return false;
   if(doc.show_teachers!==undefined&&typeof doc.show_teachers!=='boolean')return false;
   if(doc.updated_at!==undefined&&(typeof doc.updated_at!=='string'||doc.updated_at.length>55))return false;
+  // Existing timetable records without points remain valid during migration.
+  if(doc.points!==undefined){
+    if(!doc.points||typeof doc.points!=='object'||Object.keys(doc.points).length!==4)return false;
+    for(const house of HOUSES){
+      if(!Number.isSafeInteger(doc.points[house]) || Math.abs(doc.points[house])>1000000)return false;
+    }
+  }
   for(const [subject,people] of Object.entries(doc.teachers)){
     if(typeof subject!=='string'||!subject.trim()||subject.length>120||
        !people||typeof people!=='object')return false;
