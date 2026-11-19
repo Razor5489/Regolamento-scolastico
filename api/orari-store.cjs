@@ -54,8 +54,11 @@ async function writeSchedule(doc,expectedSha){
     });
     return {sha:saved.etag};
   }catch(error){
-    if(error instanceof BlobPreconditionFailedError){
-      return {error:'Gli orari sono stati modificati nel frattempo. Scarica il backup della tua bozza e ricarica la pagina.',status:409};
+    if(error instanceof BlobPreconditionFailedError ||
+       /Precondition failed|ETag mismatch/i.test(String(error?.message||''))){
+      // The caller re-reads the latest schedule, reapplies only the submitted
+      // changes and retries. The browser is not interrupted by this race.
+      return {error:'VERSIONE_SUPERATA',status:409};
     }
     throw error;
   }
