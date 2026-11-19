@@ -2,13 +2,22 @@
 const {get,put,BlobPreconditionFailedError}=require('@vercel/blob');
 
 const PATH='nightfall-orari/orari.json';
+const SCORE_HOUSES=['grifondoro','tassorosso','corvonero','serpeverde'];
+function normalizeScores(document){
+  if(!document || typeof document!=='object')return document;
+  const existing=document.points && typeof document.points==='object'?document.points:{};
+  document.points=Object.fromEntries(SCORE_HOUSES.map(house=>[
+    house, Number.isSafeInteger(existing[house]) ? existing[house] : 0
+  ]));
+  return document;
+}
 const SEED='https://raw.githubusercontent.com/Razor5489/ORARIO-LEZIONI-NIGHTFALL/main/orari.json';
 
 async function loadSaved(){
   const result=await get(PATH,{access:'private',useCache:false});
   if(!result || result.statusCode!==200 || !result.stream)return null;
   const source=await new Response(result.stream).text();
-  const document=JSON.parse(source);
+  const document=normalizeScores(JSON.parse(source));
   // For compressed JSON, Blob get() may expose a weak HTTP ETag (W/"…").
   // Conditional put(ifMatch) requires the strong/origin ETag, otherwise even
   // a single save fails with a spurious precondition error.
@@ -24,7 +33,7 @@ async function readSchedule(){
   const r=await fetch(SEED,{cache:'no-store'});
   if(!r.ok)throw Error('Non è stato possibile inizializzare gli orari dal repository pubblico.');
   const text=await r.text();
-  const seed=JSON.parse(text);
+  const seed=normalizeScores(JSON.parse(text));
   if(!seed.schedules||!seed.teachers)throw Error('I dati iniziali non sono validi.');
   try{
     const uploaded=await put(PATH,JSON.stringify(seed,null,2)+'\n',{
@@ -63,4 +72,4 @@ async function writeSchedule(doc,expectedSha){
     throw error;
   }
 }
-module.exports={readSchedule,writeSchedule};
+module.exports={readSchedule,writeSchedule,normalizeScores};
