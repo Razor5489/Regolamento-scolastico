@@ -9,7 +9,11 @@ async function loadSaved(){
   if(!result || result.statusCode!==200 || !result.stream)return null;
   const source=await new Response(result.stream).text();
   const document=JSON.parse(source);
-  const sha=result.blob?.etag;
+  // For compressed JSON, Blob get() may expose a weak HTTP ETag (W/"…").
+  // Conditional put(ifMatch) requires the strong/origin ETag, otherwise even
+  // a single save fails with a spurious precondition error.
+  const rawEtag=result.blob?.etag;
+  const sha=typeof rawEtag==='string'?rawEtag.replace(/^W\//,''):null;
   if(typeof sha!=='string'||!sha)throw Error('L’archivio non ha una versione verificabile.');
   return {document,sha};
 }
@@ -44,7 +48,7 @@ async function writeSchedule(doc,expectedSha){
       access:'private',
       addRandomSuffix:false,
       allowOverwrite:true,
-      ifMatch:expectedSha,
+      ifMatch:typeof expectedSha==='string'?expectedSha.replace(/^W\//,''):expectedSha,
       contentType:'application/json; charset=utf-8',
       cacheControlMaxAge:60
     });
