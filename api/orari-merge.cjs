@@ -15,10 +15,14 @@ function computeChanges(base,edited,role){
     for(let rowIndex=0;rowIndex<20;rowIndex++){
       const before=base.schedules[period][rowIndex];
       const after=edited.schedules[period][rowIndex];
-      for(const field of ['start','end']){
-        if(before[field]!==after[field]){
-          changes.push({kind:'time',period,rowIndex,field,previous:before[field],value:after[field]});
-        }
+      // Start and end are one logical timeslot: apply the pair atomically
+      // to avoid mixed invalid intervals when two teachers edit both ends.
+      if(before.start!==after.start || before.end!==after.end){
+        changes.push({
+          kind:'time-pair',period,rowIndex,
+          previous:{start:before.start,end:before.end},
+          value:{start:after.start,end:after.end}
+        });
       }
       for(const house of HOUSES){
         if(before.subjects[house]!==after.subjects[house]){
@@ -52,11 +56,15 @@ function applyChanges(latest,changes){
     let previous;
     let target;
     switch(change.kind){
-      case 'time':
+      case 'time-pair':
         target=document.schedules[change.period][change.rowIndex];
-        previous=target[change.field];
-        if(previous!==change.previous&&previous!==change.value)overwritten++;
-        if(previous!==change.value){target[change.field]=change.value;applied++;}
+        previous={start:target.start,end:target.end};
+        if(!same(previous,change.previous)&&!same(previous,change.value))overwritten++;
+        if(!same(previous,change.value)){
+          target.start=change.value.start;
+          target.end=change.value.end;
+          applied++;
+        }
         break;
       case 'lesson':
         target=document.schedules[change.period][change.rowIndex].subjects;
