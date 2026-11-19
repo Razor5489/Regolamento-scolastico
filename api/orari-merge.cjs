@@ -31,6 +31,13 @@ function computeChanges(base,edited,role){
       }
     }
   }
+  // Punti Casa: increments are additive; concurrent awards are preserved.
+  for(const house of HOUSES){
+    const previous=Number(base.points?.[house] ?? 0);
+    const value=Number(edited.points?.[house] ?? 0);
+    const delta=value-previous;
+    if(delta!==0)changes.push({kind:'house-points',house,delta});
+  }
   if(role==='admin'){
     const names=new Set([...Object.keys(base.teachers),...Object.keys(edited.teachers)]);
     for(const name of names){
@@ -88,6 +95,14 @@ function applyChanges(latest,changes){
         previous=str(target[change.field]);
         if(previous!==change.previous&&previous!==change.value)overwritten++;
         if(previous!==change.value){target[change.field]=change.value;applied++;}
+        break;
+      case 'house-points':
+        if(!document.points)document.points=Object.fromEntries(HOUSES.map(h=>[h,0]));
+        previous=Number(document.points[change.house] || 0);
+        if(!Number.isSafeInteger(previous+change.delta))
+          throw new Error('Punteggio Casa fuori intervallo.');
+        document.points[change.house]=previous+change.delta;
+        applied++;
         break;
       case 'visibility':
         previous=document.show_teachers;
