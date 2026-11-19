@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-18",
+  "updatedAt": "2026-11-19",
   "school": "Scuola di Magia e Stregoneria di Hogwarts",
   "era": "Anno 1890",
   "preface": "Il ruolo di professore non si limita all’insegnamento di una materia, ma comprende la responsabilità di contribuire attivamente alla crescita degli studenti e alla qualità del Roleplay all’interno di Hogwarts. Ogni docente è tenuto a seguire le presenti disposizioni, garantendo serietà, collaborazione e rispetto nei confronti degli studenti e dei colleghi.",
@@ -576,7 +576,9 @@
     "texts": {
       "t0032": "Sette Club tradizionali e un percorso formativo dedicato alle arti. Ogni scheda spiega cosa si studia, quali attività si possono svolgere e quali strade future potrebbe ispirare il singolo studente.",
       "t0048": "PROF. Kailen Crimorv",
-      "t0065": "PROF. Alex Wrenford",
+      "t0065": "PROF. Alex Wrenford \nPROF. Stroud Warren",
+      "t0098": "PROF. Alaric Whitmore",
+      "t0149": "PROF. Arcibaldo Sprite",
       "t0378": "Damocles Harrow",
       "t0380": "Ariana Chadwick"
     },
