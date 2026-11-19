@@ -2,6 +2,7 @@
 const crypto=require('node:crypto');
 const {cors}=require('./_shared.cjs');
 const {readSchedule,writeSchedule}=require('./orari-store.cjs');
+const {computeChanges,applyChanges}=require('./orari-merge.cjs');
 
 const DAYS=['Lunedì','Martedì','Mercoledì','Giovedì','Venerdì'];
 const KEYS=['1-1','1-2','2-1','2-2'];
@@ -75,26 +76,63 @@ module.exports=async function(req,res){
   let payload;
   try{payload=typeof req.body==='string'?JSON.parse(req.body):req.body;}
   catch{return res.status(400).json({error:'Dati non validi.'});}
-  if(!payload||typeof payload.sha!=='string'||payload.sha.length>200||
-     !valid(payload.document))return res.status(400).json({error:'Orari non validi.'});
-  if(current.sha!==payload.sha)return res.status(409).json({error:'Gli orari sono stati modificati da un’altra persona. Esporta la bozza e ricarica i dati.'});
+  if(!payload || !valid(payload.base) || !valid(payload.document) ||
+     typeof payload.sha!=='string'||payload.sha.length>200)
+    return res.status(428).json({error:'Il pannello deve essere aggiornato alla nuova versione. Scarica la bozza, quindi aggiorna la pagina.'});
+
+  // The role is enforced here, not only by hiding controls in the browser.
   if(role==='docente' && (
-    JSON.stringify(payload.document.teachers)!==JSON.stringify(current.document.teachers) ||
-    payload.document.show_teachers!==current.document.show_teachers
-  ))return res.status(403).json({error:'La password dei professori consente di modificare solo gli orari.'});
-  const updated=role==='docente'?{
-    ...current.document,
-    schedules:payload.document.schedules,
-    updated_at:new Date().toISOString()
-  }:{...payload.document,updated_at:new Date().toISOString()};
-  const serialized=JSON.stringify(updated);
-  if(Buffer.byteLength(serialized,'utf8')>180000)return res.status(413).json({error:'Il registro è troppo grande.'});
-  try{
-    const r=await writeSchedule(updated,payload.sha);
-    if(r.error)return res.status(r.status).json({error:r.error});
-    return res.status(200).json({ok:true,sha:r.sha,document:updated,role});
-  }catch(error){
-    console.error('Archivio orari: impossibile scrivere',String(error?.message||error).slice(0,180));
-    return res.status(502).json({error:'Impossibile salvare gli orari nell’archivio protetto. Riprova senza perdere la bozza.'});
+    JSON.stringify(payload.base.teachers)!==JSON.stringify(payload.document.teachers) ||
+    payload.base.show_teachers!==payload.document.show_teachers
+  ))return res.status(403).json({error:'La password dei professori consente di modificare soltanto gli orari.'});
+
+  // A user sends both the starting snapshot and their edited document.
+  // Only modified fields are extracted: unchanged fields from an old tab
+  // never overwrite updates made by colleagues.
+  const changes=computeChanges(payload.base,payload.document,role);
+  if(changes.length>680)
+    return res.status(413).json({error:'Troppe modifiche in un singolo salvataggio.'});
+  if(changes.length===0)
+    return res.status(200).json({ok:true,sha:current.sha,document:current.document,role,merged:false,overwritten:0,noChanges:true});
+
+  const MAX_ATTEMPTS=16;
+  for(let attempt=0;attempt<MAX_ATTEMPTS;attempt++){
+    if(attempt>0){
+      // Re-read from private storage without caching, then re-apply the exact
+      // same user edits if another teacher saved during our previous write.
+      await new Promise(resolve=>setTimeout(resolve,Math.min(210,15+attempt*15)));
+      try{current=await readSchedule();}
+      catch(error){
+        console.error('Registro orari: errore lettura durante il merge',String(error?.message||error).slice(0,140));
+        return res.status(502).json({error:'Il registro non è momentaneamente disponibile. La bozza è conservata nel browser.'});
+      }
+    }
+    if(!valid(current.document))
+      return res.status(502).json({error:'Il registro online contiene dati non validi.'});
+    const merged=applyChanges(current.document,changes);
+    if(!valid(merged.document))
+      return res.status(422).json({error:'Le fasce orarie aggiornate non risultano valide. Controlla inizio e fine della stessa lezione.'});
+    if(!merged.applied)
+      return res.status(200).json({ok:true,sha:current.sha,document:current.document,role,
+        merged:payload.sha!==current.sha,overwritten:0,noChanges:true});
+    merged.document.updated_at=new Date().toISOString();
+    if(Buffer.byteLength(JSON.stringify(merged.document),'utf8')>180000)
+      return res.status(413).json({error:'Il registro è troppo grande.'});
+    try{
+      const saved=await writeSchedule(merged.document,current.sha);
+      if(saved.error && saved.status===409)continue; // Another teacher won the CAS; retry the merged edits.
+      if(saved.error)return res.status(saved.status).json({error:saved.error});
+      return res.status(200).json({
+        ok:true,sha:saved.sha,document:merged.document,role,
+        merged:payload.sha!==current.sha,overwritten:merged.overwritten,
+        changesApplied:merged.applied
+      });
+    }catch(error){
+      console.error('Registro orari: errore scrittura',String(error?.message||error).slice(0,180));
+      return res.status(502).json({error:'Non è stato possibile salvare. Le modifiche rimangono in bozza.'});
+    }
   }
+  return res.status(503).json({
+    error:'Molti salvataggi sono arrivati nello stesso momento. Riprova Pubblica online: la bozza non è stata persa.'
+  });
 };
