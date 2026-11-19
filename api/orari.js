@@ -22,6 +22,37 @@ function valid(doc){
       if(!Number.isSafeInteger(doc.points[house]) || Math.abs(doc.points[house])>1000000)return false;
     }
   }
+  // Registro lezioni: ogni record è indipendente, così più professori
+  // possono registrare lezioni diverse senza sovrascriversi.
+  if(doc.lessons_done!==undefined){
+    const log=doc.lessons_done;
+    if(!log || typeof log!=='object'||Array.isArray(log) ||
+       Object.keys(log).length>600)return false;
+    for(const [id,entry] of Object.entries(log)){
+      if(!/^[a-zA-Z0-9-]{12,64}$/.test(id) || !entry || typeof entry!=='object' ||
+         Array.isArray(entry))return false;
+      if(!/^20\d{2}-\d{2}-\d{2}$/.test(entry.date)||
+         !Number.isFinite(Date.parse(entry.date))||
+         new Date(entry.date).toISOString().slice(0,10)!==entry.date)return false;
+      if(!KEYS.includes(entry.period)||!DAYS.includes(entry.day)||
+         !Number.isInteger(entry.slot)||entry.slot<0||entry.slot>3)return false;
+      if(!Array.isArray(entry.houses)||entry.houses.length<1||entry.houses.length>4||
+         new Set(entry.houses).size!==entry.houses.length ||
+         entry.houses.some(h=>!HOUSES.includes(h)))return false;
+      if(typeof entry.subject!=='string'||!entry.subject.trim()||
+         entry.subject.length>120||/^(tempo libero|da programmare)$/i.test(entry.subject.trim()))return false;
+      if(typeof entry.professor!=='string'||!entry.professor.trim()||
+         entry.professor.length>100)return false;
+      if(typeof entry.topic!=='string'||entry.topic.length>130||
+         typeof entry.notes!=='string'||entry.notes.length>400)return false;
+      if(typeof entry.start!=='string'||typeof entry.end!=='string'||
+         !/^([01]\d|2[0-3]):[0-5]\d$/.test(entry.start)||
+         !/^([01]\d|2[0-3]):[0-5]\d$/.test(entry.end)||
+         entry.start>=entry.end)return false;
+      if(typeof entry.recorded_at!=='string'||
+         !/^20\d{2}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,3})?Z$/.test(entry.recorded_at))return false;
+    }
+  }
   for(const [subject,people] of Object.entries(doc.teachers)){
     if(typeof subject!=='string'||!subject.trim()||subject.length>120||
        !people||typeof people!=='object')return false;
@@ -93,6 +124,17 @@ module.exports=async function(req,res){
     payload.base.show_teachers!==payload.document.show_teachers
   ))return res.status(403).json({error:'La password dei professori consente di modificare soltanto gli orari.'});
 
+  if(role==='docente'){
+    const before=payload.base.lessons_done||{};
+    const after=payload.document.lessons_done||{};
+    for(const [id,record] of Object.entries(before)){
+      if(!Object.prototype.hasOwnProperty.call(after,id) ||
+         JSON.stringify(after[id])!==JSON.stringify(record)){
+        return res.status(403).json({error:'I docenti possono aggiungere lezioni al registro. Le correzioni e le eliminazioni spettano alla Presidenza.'});
+      }
+    }
+  }
+  
   // A user sends both the starting snapshot and their edited document.
   // Only modified fields are extracted: unchanged fields from an old tab
   // never overwrite updates made by colleagues.
@@ -123,7 +165,7 @@ module.exports=async function(req,res){
       return res.status(200).json({ok:true,sha:current.sha,document:current.document,role,
         merged:payload.sha!==current.sha,overwritten:0,noChanges:true});
     merged.document.updated_at=new Date().toISOString();
-    if(Buffer.byteLength(JSON.stringify(merged.document),'utf8')>180000)
+    if(Buffer.byteLength(JSON.stringify(merged.document),'utf8')>480000)
       return res.status(413).json({error:'Il registro è troppo grande.'});
     try{
       const saved=await writeSchedule(merged.document,current.sha);
