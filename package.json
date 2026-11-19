@@ -1,0 +1,9 @@
+{
+  "name": "nightfall-scuola-backend",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Servizio di gestione regolamenti e orari Nightfall",
+  "dependencies": {
+    "@vercel/blob": "2.9.0"
+  }
+}
