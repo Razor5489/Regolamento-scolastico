@@ -11,13 +11,21 @@ function normalizeScores(document){
   ]));
   return document;
 }
+// Legacy documents have no lesson history; initialize it on read without
+// changing timetable, points or teacher records.
+function normalizeLessonLog(document){
+  if(!document || typeof document!=='object')return document;
+  if(!document.lessons_done || typeof document.lessons_done!=='object' ||
+     Array.isArray(document.lessons_done))document.lessons_done={};
+  return document;
+}
 const SEED='https://raw.githubusercontent.com/Razor5489/ORARIO-LEZIONI-NIGHTFALL/main/orari.json';
 
 async function loadSaved(){
   const result=await get(PATH,{access:'private',useCache:false});
   if(!result || result.statusCode!==200 || !result.stream)return null;
   const source=await new Response(result.stream).text();
-  const document=normalizeScores(JSON.parse(source));
+  const document=normalizeLessonLog(normalizeScores(JSON.parse(source)));
   // For compressed JSON, Blob get() may expose a weak HTTP ETag (W/"…").
   // Conditional put(ifMatch) requires the strong/origin ETag, otherwise even
   // a single save fails with a spurious precondition error.
@@ -33,7 +41,7 @@ async function readSchedule(){
   const r=await fetch(SEED,{cache:'no-store'});
   if(!r.ok)throw Error('Non è stato possibile inizializzare gli orari dal repository pubblico.');
   const text=await r.text();
-  const seed=normalizeScores(JSON.parse(text));
+  const seed=normalizeLessonLog(normalizeScores(JSON.parse(text)));
   if(!seed.schedules||!seed.teachers)throw Error('I dati iniziali non sono validi.');
   try{
     const uploaded=await put(PATH,JSON.stringify(seed,null,2)+'\n',{
@@ -72,4 +80,4 @@ async function writeSchedule(doc,expectedSha){
     throw error;
   }
 }
-module.exports={readSchedule,writeSchedule,normalizeScores};
+module.exports={readSchedule,writeSchedule,normalizeScores,normalizeLessonLog};
