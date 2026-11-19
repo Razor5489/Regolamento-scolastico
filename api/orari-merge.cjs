@@ -38,6 +38,20 @@ function computeChanges(base,edited,role){
     const delta=value-previous;
     if(delta!==0)changes.push({kind:'house-points',house,delta});
   }
+  // Ogni lezione svolta ha un ID indipendente. Si uniscono soltanto
+  // i nuovi record o le correzioni, senza copiare vecchi elenchi interi.
+  const prior=base.lessons_done||{};
+  const next=edited.lessons_done||{};
+  for(const id of new Set([...Object.keys(prior),...Object.keys(next)])){
+    const before=prior[id],after=next[id];
+    if(!before && after){
+      changes.push({kind:'log-add',id,value:copy(after)});
+    } else if(before && !after && role==='admin'){
+      changes.push({kind:'log-remove',id,previous:copy(before)});
+    } else if(before && after && !same(before,after) && role==='admin'){
+      changes.push({kind:'log-update',id,previous:copy(before),value:copy(after)});
+    }
+  }
   if(role==='admin'){
     const names=new Set([...Object.keys(base.teachers),...Object.keys(edited.teachers)]);
     for(const name of names){
@@ -103,6 +117,25 @@ function applyChanges(latest,changes){
           throw new Error('Punteggio Casa fuori intervallo.');
         document.points[change.house]=previous+change.delta;
         applied++;
+        break;
+      case 'log-add':
+        if(!document.lessons_done)document.lessons_done={};
+        previous=document.lessons_done[change.id];
+        // Non sovrascrivere una registrazione esistente con lo stesso ID.
+        if(previous && !same(previous,change.value))overwritten++;
+        if(!previous){document.lessons_done[change.id]=copy(change.value);applied++;}
+        break;
+      case 'log-remove':
+        if(!document.lessons_done)document.lessons_done={};
+        previous=document.lessons_done[change.id];
+        if(previous && !same(previous,change.previous))overwritten++;
+        if(previous){delete document.lessons_done[change.id];applied++;}
+        break;
+      case 'log-update':
+        if(!document.lessons_done)document.lessons_done={};
+        previous=document.lessons_done[change.id];
+        if(!same(previous,change.previous) && !same(previous,change.value))overwritten++;
+        if(!same(previous,change.value)){document.lessons_done[change.id]=copy(change.value);applied++;}
         break;
       case 'visibility':
         previous=document.show_teachers;
