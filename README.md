@@ -1,59 +1,25 @@
-# NIGHTFALL RP · Regolamento Scolastico
+# NIGHTFALL RP — Regolamento Scolastico
 
-Portale del Regolamento Scolastico di Hogwarts (1890), con disposizioni per studenti e personale, il Regolamento Professori e le linee guida dei docenti.
+Sito: https://razor5489.github.io/Regolamento-scolastico/
 
-**Sito pubblico:** https://razor5489.github.io/Regolamento-scolastico/
+Contiene il Regolamento Scolastico, il Regolamento Professori e le Linee guida di Hogwarts (1890).
 
-## Cosa offre il sito
+## Gestione con password
 
-- Regolamento Professori: 8 capitoli.
-- Linee guida del Corpo Docenti: 10 capitoli.
-- Regolamento Interno Scolastico: 10 capitoli, 27 articoli e tre livelli di infrazioni disciplinari.
-- Indice, ricerca e stampa/PDF.
-- Pulsante **Gestisci regolamento** con accesso tramite **password**.
-- Editor per modificare, aggiungere, cancellare e riordinare capitoli e articoli di tutte e tre le sezioni.
-- Bozze, backup JSON e pubblicazione nel repository GitHub.
+Il pulsante "Gestisci regolamento" utilizza la password ADMIN_PASSWORD configurata come segreto Vercel. Le modifiche vengono pubblicate nell'archivio privato Vercel Blob, non tramite un token GitHub.
 
-## Attivare la gestione con password
+Per leggere i contenuti aggiornati il sito chiama /api/document-public. La modifica avviene tramite /api/document, protetta dalla password. Il servizio conserva le revisioni e verifica che nessuno abbia modificato contemporaneamente il documento.
 
-Il sito pubblico è ospitato su GitHub Pages. GitHub Pages non può conservare in modo sicuro una password o aggiornare da solo un repository: per la gestione protetta serve un piccolo backend. Il codice è già pronto, ma va pubblicato su un servizio di hosting.
+Il contenuto iniziale è importato una sola volta dal file regolamento.json del repository. Quel file rimane una copia pubblica di recupero, non la fonte dei salvataggi quotidiani. Dopo ogni salvataggio online basta ricaricare il sito per vedere gli aggiornamenti, senza attendere GitHub Pages.
 
-### Percorso consigliato: Vercel
+## Configurazione Vercel
 
-Il codice del backend è nei file `api/login.js`, `api/document.js` e `api/_shared.cjs`.
+Variabili di ambiente richieste: ADMIN_PASSWORD e BLOB_READ_WRITE_TOKEN, mantenute private nelle impostazioni di Vercel.
 
-1. Collega Vercel e importa il repository `Razor5489/Regolamento-scolastico` come progetto.
-2. Configura **due variabili segrete**, nelle impostazioni del progetto Vercel:
-   - `ADMIN_PASSWORD`: una password forte scelta da te. Se vuoi la stessa della Biblioteca Nightfall, impostala uguale **privatamente nelle impostazioni**, senza comunicarla in chat.
-   - `GITHUB_TOKEN`: un token **fine-grained** del tuo account GitHub, con accesso **solo** a `Regolamento-scolastico` e permesso **Contents: Read and write**.
-3. Pubblica il progetto Vercel, ricava il suo URL HTTPS reale.
-4. In GitHub apri `config.json` e imposta `apiUrl` con quell'URL (senza slash finale):
+GITHUB_TOKEN non è più utilizzato dall'editor del regolamento.
 
-```json
-{"apiUrl":"https://nome-reale-progetto.vercel.app"}
-```
+Il progetto Vercel ospita anche gli endpoint di Club e Orari: conservarli in ogni successiva pubblicazione.
 
-5. Pubblica la modifica. Dopo l'aggiornamento di GitHub Pages, il tasto **Gestisci regolamento** userà la password.
-
-Il token resta **solo sul server**, in una variabile segreta Vercel. Il browser trasmette la password al server su HTTPS per l'autenticazione; la password non è scritta nell'HTML o salvata in localStorage.
-
-### Come creare il token GitHub
-
-GitHub → Settings → Developer settings → Personal access tokens → Fine-grained tokens → Generate new token. Seleziona **Only select repositories → Regolamento-professori** e **Repository permissions → Contents: Read and write**. Conserva il token soltanto nelle variabili segrete del backend e revocalo se viene esposto.
-
-### Alternativa: Cloudflare Workers
-
-È disponibile anche una versione del backend in `worker/index.js`, con il file `worker/wrangler.toml`. Puoi distribuirla su Cloudflare Workers e configurare lì gli stessi segreti `ADMIN_PASSWORD` e `GITHUB_TOKEN`, quindi impostare il suo URL in `config.json`.
-
-## File importanti
-
-- `index.html`: sito pubblico ed editor.
-- `regolamento.json`: testi del regolamento e delle linee guida.
-- `config.json`: solo l'URL pubblico del servizio backend, **nessuna password**.
-- `api/`: backend Vercel.
-- `worker/`: backend Cloudflare alternativo.
-- `.nojekyll`: compatibilità GitHub Pages.
-
-**Stato:** il modulo password e il backend sono pronti nel codice. L'accesso funzionerà soltanto dopo che sarà stato attivato un servizio backend e configurato l'URL in `config.json`.
+Backend: https://nightfall-regolamento-professori.vercel.app/
 
 *Creato per NightFall da Razor.*
