@@ -25,7 +25,7 @@ function cors(req,res,methods) {
 }
 function authorized(req) {
   const pass=process.env.ADMIN_PASSWORD;
-  if(!pass || !process.env.GITHUB_TOKEN)return false;
+  if(!pass)return false;
   const header=req.headers.authorization || '';
   if(!header.startsWith('Bearer '))return false;
   let received;
