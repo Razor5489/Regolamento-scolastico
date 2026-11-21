@@ -39,6 +39,7 @@ dialog{border:1px solid #a68a58;background:#f7f0df;color:var(--ink);padding:0;wi
 </section>
 <main class="page-wrap">
  <div id="loading" class="notice" role="status">Caricamento del regolamento…</div>
+ <div id="syncWarning" class="notice" role="status" hidden>Archivio online temporaneamente non disponibile: stai leggendo la copia pubblicata su GitHub. Le modifiche online potrebbero non essere aggiornate.</div>
  <div id="error" class="notice" role="alert" hidden></div>
  <div id="draftBanner" class="notice" hidden>Stai visualizzando modifiche in bozza. Per renderle visibili a tutti, apri «Gestisci regolamento» e premi «Pubblica online».</div>
  <section id="intro" class="intro-panel" hidden><span class="smallcap" id="introLabel">Premessa · Direzione Scolastica</span><p id="preface"></p></section>
@@ -91,7 +92,7 @@ dialog{border:1px solid #a68a58;background:#f7f0df;color:var(--ink);padding:0;wi
    <details style="margin-top:18px"><summary style="cursor:pointer">Modifica anche la premessa generale</summary><form id="prefaceForm" style="padding-top:13px"><label class="field"><span>Premessa mostrata in alto</span><textarea id="editPreface" rows="5" maxlength="2200"></textarea></label><button class="btn" type="submit">Salva premessa nella bozza</button></form></details>
    <div class="editor-footer"><div class="actions"><button id="publishBtn" class="btn primary" type="button">Pubblica online</button><button id="discardBtn" class="btn danger" type="button">Scarta la bozza</button></div><span id="dirtyLabel" class="help">Nessuna modifica in bozza</span></div>
    <p id="editorStatus" class="state" role="status"></p>
-   <p class="help">Le modifiche vengono salvate nel file <strong>regolamento.json</strong> su GitHub. Il sito pubblico si aggiorna dopo la pubblicazione di GitHub Pages; le modifiche contemporanee vengono controllate per evitare sovrascritture.</p>
+   <p class="help">Le modifiche vengono salvate nell’archivio protetto di Nightfall e diventano subito consultabili anche sul sito pubblico. Le modifiche contemporanee vengono controllate per evitare sovrascritture.</p>
   </section>
  </div>
 </dialog>
@@ -365,14 +366,14 @@ $("discardBtn").onclick=()=>{
 $("exportBtn").onclick=()=>{
  const content=JSON.stringify(state,null,2)+"\n";
  const url=URL.createObjectURL(new Blob([content],{type:"application/json"}));
- const a=element("a");a.href=url;a.download="nightfall-regolamento-professori-backup.json";a.click();
+ const a=element("a");a.href=url;a.download="nightfall-regolamento-scolastico-backup.json";a.click();
  setTimeout(()=>URL.revokeObjectURL(url),1000);
 };
 $("publishBtn").onclick=async()=>{
  if(busy)return;
  if(!dirty()){setStatus("Non ci sono modifiche da pubblicare.");return;}
  if(!secret){setStatus("Accedi nuovamente alla gestione.");return;}
- if(!confirm("Pubblicare tutte le modifiche su GitHub, rendendole visibili a studenti e docenti?"))return;
+ if(!confirm("Pubblicare tutte le modifiche al regolamento, rendendole visibili a studenti e docenti?"))return;
  busy=true;$("publishBtn").disabled=true;setStatus("Controllo della versione e pubblicazione in corso…");
  try {
   const remote=await loadFromService();
@@ -380,7 +381,7 @@ $("publishBtn").onclick=async()=>{
   state.updatedAt=new Date().toISOString().slice(0,10);
   const result=await api("/api/document","PUT",{document:state,sha:remote.sha});
   blobSha=result.sha;published=clone(state);render();
-  setStatus("Modifiche pubblicate su GitHub. Il sito pubblico verrà aggiornato da GitHub Pages.");
+  setStatus("Modifiche pubblicate nell’archivio online. Tutti vedranno la nuova versione aggiornando la pagina.");
  }catch(error) {
   if(error.status===401||error.status===403){
    secret=null;
@@ -394,22 +395,37 @@ window.addEventListener("beforeunload",event=>{if(dirty()){event.preventDefault(
   const cfgResponse=await fetch("./config.json?ts="+Date.now(),{cache:"no-store"});
   if(cfgResponse.ok){
    const config=await cfgResponse.json();
-   if(typeof config.apiUrl==="string" && config.apiUrl.trim()){
+   if(typeof config.apiUrl==="string"&&config.apiUrl.trim()){
     const url=new URL(config.apiUrl.trim());
-    if(url.protocol==="https:" && !url.username && !url.password && !url.search && !url.hash)
+    if(url.protocol==="https:"&&!url.username&&!url.password&&!url.search&&!url.hash)
      SERVICE_URL=url.href.replace(/\/+$/,"");
    }
   }
  }catch{SERVICE_URL="";}
+ let live=null;
+ if(SERVICE_URL){
+  try{
+   const response=await fetch(SERVICE_URL+"/api/document-public",{cache:"no-store",signal:AbortSignal.timeout(15000)});
+   if(!response.ok)throw new Error("Archivio online non raggiungibile.");
+   const result=await response.json();
+   if(!valid(result.document))throw new Error("Contenuti online non validi.");
+   live=result.document;
+  }catch(error){
+   $("syncWarning").hidden=false;
+  }
+ }else $("syncWarning").hidden=false;
  try{
-  const response=await fetch("./regolamento.json?ts="+Date.now(),{cache:"no-store"});
-  if(!response.ok)throw new Error("File regolamento.json non disponibile.");
-  const content=await response.json();
-  if(!valid(content))throw new Error("I contenuti del regolamento non sono nel formato previsto.");
+  let content=live;
+  if(!content){
+   const response=await fetch("./regolamento.json?ts="+Date.now(),{cache:"no-store"});
+   if(!response.ok)throw new Error("File regolamento.json non disponibile.");
+   content=await response.json();
+   if(!valid(content))throw new Error("La copia del regolamento non è valida.");
+  }
   state=content;published=clone(content);render();
  }catch(error){
   $("loading").hidden=true;$("error").hidden=false;
-  $("error").textContent="Impossibile caricare il regolamento: "+error.message+" Apri il sito pubblicato tramite GitHub Pages.";
+  $("error").textContent="Impossibile caricare il regolamento: "+error.message;
   $("manageBtn").disabled=true;
  }
 })();
