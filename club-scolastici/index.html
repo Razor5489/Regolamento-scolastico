@@ -90,6 +90,8 @@
 .quick-card label{display:grid;gap:6px;margin-top:11px;color:#6b593e;font-size:11px;font-weight:800}
 .quick-card input{width:100%;background:#fff;border:1px solid #cbbd9f;padding:10px 11px;color:#213141;font:13px var(--body);border-radius:0}
 .quick-card input:focus-visible{outline:2px solid #aa854f;outline-offset:2px}
+.quick-card label.founder-field{background:#f0e7d6;padding:11px;border:1px dashed #cab28b;margin:12px 0 16px}
+.quick-card label.founder-field input{background:#fffdfa}
 .quick-info{padding:0 18px 17px;color:#715c40;font-size:11px;display:block}
 @media(max-width:720px){.quick-grid{grid-template-columns:1fr}.quick-registry>summary{font-size:12px}.quick-card h4{font-size:21px}}
 
@@ -173,10 +175,10 @@
    <div class="admin-panel-head"><div><h3>Testi della pagina</h3><small>Seleziona una sezione o cerca una frase per modificarla.</small></div><button id="adminLogout" type="button" class="admin-btn secondary">Esci dalla gestione</button></div>
 
    <details class="quick-registry" id="adminQuickRegistry" open>
-    <summary>✦ Gestione rapida — Responsabili e Vice Responsabili dei Club</summary>
-    <p>Ogni incarico ha un campo distinto, identificato dal proprio Club. Modifica i nominativi qui sotto e poi premi <strong>Pubblica online su GitHub</strong> in fondo al pannello.</p>
+    <summary>✦ Gestione rapida — Professori Fondatori, Responsabili e Vice Responsabili</summary>
+    <p>Per ogni Club puoi aggiornare separatamente il <strong>Professore Fondatore</strong>, il <strong>Responsabile</strong> e il <strong>Vice Responsabile</strong>. Per Medimagia puoi aggiornare il docente di riferimento. Premi <strong>Pubblica online su GitHub</strong> per rendere visibili le modifiche.</p>
     <div class="quick-grid" id="adminQuickRegistryGrid"></div>
-    <small class="quick-info">I nomi sono mostrati anche nella sezione «Referenti Club» del sito. Se la posizione è vacante, lascia «Da assegnare».</small>
+    <small class="quick-info">Responsabili e Vice Responsabili vengono mostrati nella sezione «Referenti Club». I Professori Fondatori sono mostrati nei dettagli del rispettivo Club. Se un incarico non è assegnato, puoi lasciare il testo segnaposto.</small>
    </details>
    <div class="admin-settings"><h4>Impostazioni della pagina (SEO)</h4><div class="admin-setting-grid"><label>Titolo della scheda del browser<input id="adminSeoTitle" maxlength="220"></label><label>Descrizione per i motori di ricerca<input id="adminSeoDescription" maxlength="600"></label></div></div>
    <div class="admin-toolbar"><input id="adminSearch" class="admin-search" type="search" placeholder="Cerca parole, Club, professori, articoli..." aria-label="Cerca un testo"><select class="admin-filter" id="adminSection" aria-label="Filtra per sezione"><option value="all">Tutta la pagina</option><option value="header">Navigazione</option><option value="inizio">Homepage</option><option value="notice">Avviso sul limite</option><option value="club">Club e fondatori</option><option value="futuro">Professioni e futuro</option><option value="regolamento">Regolamento (12 articoli)</option><option value="iscrizioni">Iscrizioni</option><option value="organizzazione">Organizzazione</option><option value="referenti">Responsabili e Vice Responsabili</option><option value="faq">Domande frequenti</option><option value="footer">Footer</option></select></div>
@@ -307,6 +309,27 @@
    const title=registryCard.querySelector("h3")?.textContent||"Club";
    const card=document.createElement("section");card.className="quick-card";
    const heading=document.createElement("h4");heading.textContent=title;card.append(heading);
+   // Il docente fondatore vive nella scheda pubblica del Club; usiamo
+   // lo stesso nodo di testo indicizzato dall'editor per mantenere
+   // compatibilità con le modifiche già pubblicate in clubsPage.texts.
+   const clubCard=document.querySelectorAll(".club-card")[index];
+   const founderSpan=clubCard?.querySelector(".faculty span");
+   const founderItem=founderSpan&&editables.find(x=>x.node.parentElement===founderSpan);
+   if(founderItem){
+    const label=document.createElement("label");
+    label.className="founder-field";
+    label.textContent=index===7?"Docente di riferimento Medimagia":"Professore Fondatore — "+title;
+    const input=document.createElement("input");
+    input.type="text";input.maxLength=160;input.value=getText(founderItem);
+    input.dataset.quickKey=founderItem.key;
+    input.setAttribute("aria-label",label.textContent);
+    input.addEventListener("input",()=>{
+     setText(founderItem,input.value);
+     const standard=$("f-"+founderItem.key);if(standard)standard.value=input.value;
+     refreshState();
+    });
+    label.append(input);card.append(label);
+   }
    const fields=["lead","vice"];
    for(const field of fields){
     const span=registryCard.querySelector('[data-registry="'+index+'-'+field+'"]');
