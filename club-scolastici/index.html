@@ -171,12 +171,12 @@
    <p id="adminLoginStatus" class="admin-status" role="status"></p>
   </section>
   <section id="adminEditor" class="admin-hidden">
-   <div class="admin-caution"><strong>Modifica tutti i testi:</strong> puoi aggiornare titoli, sottotitoli, avvisi, descrizioni, schede dei Club, nomi dei Professori Fondatori, articoli, domande frequenti, pulsanti e footer. Le modifiche sono visibili in anteprima solo a te finché non premi <strong>Pubblica online</strong>. Il salvataggio pubblica direttamente sul repository GitHub, senza download manuali.</div>
+   <div class="admin-caution"><strong>Modifica tutti i testi:</strong> puoi aggiornare titoli, sottotitoli, avvisi, descrizioni, schede dei Club, Professori Fondatori, articoli, domande frequenti, pulsanti e footer. Le modifiche saranno pubblicate nell'archivio protetto di Hogwarts e appariranno direttamente sul sito ospitato da GitHub Pages, senza scaricare o sostituire file.</div>
    <div class="admin-panel-head"><div><h3>Testi della pagina</h3><small>Seleziona una sezione o cerca una frase per modificarla.</small></div><button id="adminLogout" type="button" class="admin-btn secondary">Esci dalla gestione</button></div>
 
    <details class="quick-registry" id="adminQuickRegistry" open>
     <summary>✦ Gestione rapida — Professori Fondatori, Responsabili e Vice Responsabili</summary>
-    <p>Per ogni Club puoi aggiornare separatamente il <strong>Professore Fondatore</strong>, il <strong>Responsabile</strong> e il <strong>Vice Responsabile</strong>. Per Medimagia puoi aggiornare il docente di riferimento. Premi <strong>Pubblica online su GitHub</strong> per rendere visibili le modifiche.</p>
+    <p>Per ogni Club puoi aggiornare separatamente il <strong>Professore Fondatore</strong>, il <strong>Responsabile</strong> e il <strong>Vice Responsabile</strong>. Per Medimagia puoi aggiornare il docente di riferimento. Premi <strong>Pubblica online</strong> per rendere visibili le modifiche.</p>
     <div class="quick-grid" id="adminQuickRegistryGrid"></div>
     <small class="quick-info">Responsabili e Vice Responsabili vengono mostrati nella sezione «Referenti Club». I Professori Fondatori sono mostrati nei dettagli del rispettivo Club. Se un incarico non è assegnato, puoi lasciare il testo segnaposto.</small>
    </details>
@@ -185,7 +185,7 @@
    <div id="adminCount" class="admin-page-count" role="status"></div>
    <div id="adminTextList" class="admin-text-list"></div>
    <div class="admin-pages"><span id="adminPageInfo"></span><div><button class="admin-btn secondary" type="button" id="adminPrev">← Precedenti</button> <button class="admin-btn secondary" type="button" id="adminNext">Successivi →</button></div></div>
-   <div class="admin-bottom"><div><button id="adminPublish" class="admin-btn" type="button">Pubblica online su GitHub ↗</button> <button id="adminDiscard" class="admin-btn danger" type="button">Scarta modifiche</button></div><span id="adminUnsaved" class="admin-unsaved">Nessuna modifica in sospeso</span></div>
+   <div class="admin-bottom"><div><button id="adminPublish" class="admin-btn" type="button">Pubblica online ↗</button> <button id="adminDiscard" class="admin-btn danger" type="button">Scarta modifiche</button></div><span id="adminUnsaved" class="admin-unsaved">Nessuna modifica in sospeso</span></div>
    <p class="admin-note">La password rimane solo nella memoria della sessione corrente. La pubblicazione richiede che la pagina e il servizio protetto siano raggiungibili; se un altro amministratore modifica contemporaneamente i contenuti, ti verrà richiesto di ricaricarli per evitare sovrascritture.</p>
    <p id="adminEditorStatus" class="admin-status" role="status"></p>
   </section>
@@ -418,11 +418,21 @@
  }
  async function loadPublic(){
   try{
-   const res=await fetch("../regolamento.json?ts="+Date.now(),{cache:"no-store"});
-   if(!res.ok)return;
+   await loadConfig();
+   const res=await fetch(apiUrl+"/api/clubs-content?ts="+Date.now(),{cache:"no-store"});
+   if(!res.ok)throw new Error("Archivio Club non raggiungibile.");
    const content=await res.json();
-   applyPage(cleanPage(content.clubsPage||blankPage()));
-  }catch(error){console.warn("Club: contenuti pubblici predefiniti.",error);}
+   applyPage(cleanPage(content.document||blankPage()));
+  }catch(error){
+   console.warn("Club: archivio temporaneamente non disponibile, uso la copia GitHub.",error);
+   try{
+    const fallback=await fetch("../regolamento.json?ts="+Date.now(),{cache:"no-store"});
+    if(fallback.ok){
+     const backup=await fallback.json();
+     applyPage(cleanPage(backup.clubsPage||blankPage()));
+    }
+   }catch{}
+  }
  }
  loadPublic();
  $("managePageBtn").addEventListener("click",()=>{
@@ -439,11 +449,11 @@
   const candidate=$("adminPassword").value;if(!candidate)return;
   busy=true;$("adminLoginBtn").disabled=true;setStatus("Verifica della password in corso…","adminLoginStatus");
   try{
-   await api("/api/login","POST",undefined,candidate);
-   const result=await api("/api/document","GET",undefined,candidate);
+   await api("/api/clubs-content","POST",undefined,candidate);
+   const result=await api("/api/clubs-content","GET",undefined,candidate);
    remoteSha=result.sha;
    pass=candidate;
-   basePage=cleanPage(result.document.clubsPage||blankPage());
+   basePage=cleanPage(result.document||blankPage());
    currentPage=copy(basePage);
    applyPage(basePage);
    gate.classList.add("admin-hidden");editor.classList.remove("admin-hidden");
@@ -477,20 +487,18 @@
   if(!confirm("Pubblicare tutti i testi aggiornati sul sito dei Club tramite GitHub?"))return;
   busy=true;refreshState();setStatus("Controllo della versione e pubblicazione su GitHub in corso…");
   try{
-   const remote=await fetchRemote();
-   const remotePage=cleanPage(remote.document.clubsPage||blankPage());
+   const remote=await api("/api/clubs-content","GET");
+   const remotePage=cleanPage(remote.document||blankPage());
    if(JSON.stringify(remotePage)!==JSON.stringify(basePage)){
     throw new Error("Il sito dei Club è stato modificato da un altro amministratore. Scarta le modifiche, esci e accedi di nuovo per caricare la versione aggiornata.");
    }
-   const replacement=copy(remote.document);
-   replacement.clubsPage=buildCurrent();
-   replacement.updatedAt=new Date().toISOString().slice(0,10);
-   const result=await api("/api/document","PUT",{document:replacement,sha:remote.sha});
+   const replacement=buildCurrent();
+   const result=await api("/api/clubs-content","PUT",{document:replacement,sha:remote.sha});
    remoteSha=result.sha;
-   basePage=cleanPage(replacement.clubsPage);
+   basePage=cleanPage(replacement);
    currentPage=copy(basePage);
    refreshState();
-   setStatus("Modifiche pubblicate su GitHub. GitHub Pages potrebbe impiegare qualche minuto per mostrarle sul sito pubblico.");
+   setStatus("Modifiche pubblicate correttamente nell’archivio protetto. Sono visibili sul sito GitHub Pages dopo un aggiornamento della pagina.");
   }catch(error){
    if(error.status===401||error.status===403){
     setStatus("Sessione non autorizzata: esci e accedi nuovamente con la password.");
