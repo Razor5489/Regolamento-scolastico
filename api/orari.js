@@ -31,24 +31,31 @@ function valid(doc){
     for(const [id,entry] of Object.entries(log)){
       if(!/^[a-zA-Z0-9-]{12,64}$/.test(id) || !entry || typeof entry!=='object' ||
          Array.isArray(entry))return false;
-      if(!/^20\d{2}-\d{2}-\d{2}$/.test(entry.date)||
-         !Number.isFinite(Date.parse(entry.date))||
-         new Date(entry.date).toISOString().slice(0,10)!==entry.date)return false;
-      if(!KEYS.includes(entry.period)||!DAYS.includes(entry.day)||
-         !Number.isInteger(entry.slot)||entry.slot<0||entry.slot>3)return false;
+      if(!KEYS.includes(entry.period))return false;
       if(!Array.isArray(entry.houses)||entry.houses.length<1||entry.houses.length>4||
          new Set(entry.houses).size!==entry.houses.length ||
          entry.houses.some(h=>!HOUSES.includes(h)))return false;
       if(typeof entry.subject!=='string'||!entry.subject.trim()||
          entry.subject.length>120||/^(tempo libero|da programmare)$/i.test(entry.subject.trim()))return false;
-      if(typeof entry.professor!=='string'||!entry.professor.trim()||
-         entry.professor.length>100)return false;
-      if(typeof entry.topic!=='string'||entry.topic.length>130||
-         typeof entry.notes!=='string'||entry.notes.length>400)return false;
-      if(typeof entry.start!=='string'||typeof entry.end!=='string'||
-         !/^([01]\d|2[0-3]):[0-5]\d$/.test(entry.start)||
-         !/^([01]\d|2[0-3]):[0-5]\d$/.test(entry.end)||
-         entry.start>=entry.end)return false;
+      // Reminder-style entries do not require date, time, room or professor.
+      // Older entries retain their optional historical metadata.
+      if(entry.professor!==undefined &&
+         (typeof entry.professor!=='string'||entry.professor.length>100))return false;
+      if(entry.topic!==undefined &&
+         (typeof entry.topic!=='string'||entry.topic.length>130))return false;
+      if(entry.notes!==undefined &&
+         (typeof entry.notes!=='string'||entry.notes.length>400))return false;
+      if(['date','day','slot','start','end'].some(key=>entry[key]!==undefined)){
+        if(!/^20\d{2}-\d{2}-\d{2}$/.test(entry.date)||
+           !Number.isFinite(Date.parse(entry.date))||
+           new Date(entry.date).toISOString().slice(0,10)!==entry.date)return false;
+        if(!DAYS.includes(entry.day)||!Number.isInteger(entry.slot)||
+           entry.slot<0||entry.slot>3)return false;
+        if(typeof entry.start!=='string'||typeof entry.end!=='string'||
+           !/^([01]\d|2[0-3]):[0-5]\d$/.test(entry.start)||
+           !/^([01]\d|2[0-3]):[0-5]\d$/.test(entry.end)||
+           entry.start>=entry.end)return false;
+      }
       if(typeof entry.recorded_at!=='string'||
          !/^20\d{2}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,3})?Z$/.test(entry.recorded_at))return false;
     }
