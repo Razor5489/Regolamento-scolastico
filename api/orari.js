@@ -15,6 +15,13 @@ function valid(doc){
   if(Object.keys(doc.teachers).length>40)return false;
   if(doc.show_teachers!==undefined&&typeof doc.show_teachers!=='boolean')return false;
   if(doc.updated_at!==undefined&&(typeof doc.updated_at!=='string'||doc.updated_at.length>55))return false;
+  // Separate timestamp for house points; unlike updated_at it must never
+  // change as a side effect of lesson, timetable or teacher edits.
+  if(doc.points_updated_at!==undefined &&
+     (typeof doc.points_updated_at!=='string' ||
+      !/^20\d{2}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/.test(doc.points_updated_at) ||
+      !Number.isFinite(Date.parse(doc.points_updated_at))))
+    return false;
   // Existing timetable records without points remain valid during migration.
   if(doc.points!==undefined){
     if(!doc.points||typeof doc.points!=='object'||Object.keys(doc.points).length!==4)return false;
@@ -174,7 +181,11 @@ module.exports=async function(req,res){
     if(!merged.applied)
       return res.status(200).json({ok:true,sha:current.sha,document:current.document,role,
         merged:payload.sha!==current.sha,overwritten:0,noChanges:true});
-    merged.document.updated_at=new Date().toISOString();
+    const saveTime=new Date().toISOString();
+    merged.document.updated_at=saveTime;
+    // Timestamp only real point changes, including points saved concurrently.
+    if(changes.some(change=>change.kind==='house-points'))
+      merged.document.points_updated_at=saveTime;
     if(Buffer.byteLength(JSON.stringify(merged.document),'utf8')>480000)
       return res.status(413).json({error:'Il registro è troppo grande.'});
     try{
