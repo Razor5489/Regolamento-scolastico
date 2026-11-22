@@ -167,7 +167,7 @@
  <div class="admin-content">
   <section id="adminGate" class="admin-login">
    <h3 class="section-title" style="font-size:37px">Accesso <em>riservato</em></h3>
-   <p>Inserisci la stessa password utilizzata per <strong>Gestisci regolamento</strong>. La password è verificata dal servizio protetto e non è inserita nel codice della pagina.</p>
+   <p>Inserisci la <strong>password dedicata ai Club Scolastici</strong>. L'accesso è verificato da un servizio indipendente da quello degli orari; la password non compare nel codice pubblico della pagina.</p>
    <form id="adminLogin"><label>Password di gestione<input id="adminPassword" type="password" maxlength="256" autocomplete="current-password" placeholder="Password" required></label><button class="admin-btn" id="adminLoginBtn" type="submit">Accedi alla gestione ↗</button></form>
    <p id="adminLoginStatus" class="admin-status" role="status"></p>
   </section>
@@ -187,7 +187,7 @@
    <div id="adminTextList" class="admin-text-list"></div>
    <div class="admin-pages"><span id="adminPageInfo"></span><div><button class="admin-btn secondary" type="button" id="adminPrev">← Precedenti</button> <button class="admin-btn secondary" type="button" id="adminNext">Successivi →</button></div></div>
    <div class="admin-bottom"><div><button id="adminPublish" class="admin-btn" type="button">Pubblica online ↗</button> <button id="adminDiscard" class="admin-btn danger" type="button">Scarta modifiche</button></div><span id="adminUnsaved" class="admin-unsaved">Nessuna modifica in sospeso</span></div>
-   <p class="admin-note">La password rimane solo nella memoria della sessione corrente. La pubblicazione richiede che la pagina e il servizio protetto siano raggiungibili; se un altro amministratore modifica contemporaneamente i contenuti, ti verrà richiesto di ricaricarli per evitare sovrascritture.</p>
+   <p class="admin-note">La password rimane solo nella memoria della sessione corrente. Le modifiche vengono pubblicate nell'archivio dedicato ai Club e non dipendono dalle pubblicazioni degli orari scolastici. In caso di modifiche contemporanee, aggiorna la pagina per evitare sovrascritture.</p>
    <p id="adminEditorStatus" class="admin-status" role="status"></p>
   </section>
  </div>
@@ -383,12 +383,10 @@
   $("adminNext").disabled=editorPage+1>=max;
  }
  async function loadConfig(){
-  if(apiUrl)return apiUrl;
-  const res=await fetch("../config.json",{cache:"no-store"});
-  if(!res.ok)throw new Error("Configurazione del servizio di gestione non trovata.");
-  const cfg=await res.json();const url=new URL(cfg.apiUrl);
-  if(url.protocol!=="https:"||url.username||url.password||url.search||url.hash)throw new Error("Indirizzo del servizio non valido.");
-  apiUrl=url.href.replace(/\/+$/,"");return apiUrl;
+  // Il servizio dei Club è indipendente da quello degli orari e dei regolamenti.
+  // Evita di leggere ../config.json: è condiviso e può essere modificato da altri siti.
+  apiUrl="https://nightfall-club-scolastici-api.vercel.app";
+  return apiUrl;
  }
  function encodePassword(value){
   const bytes=new TextEncoder().encode(value);let binary="";
@@ -400,14 +398,26 @@
   const headers={"Accept":"application/json"};
   if(password!==null)headers.Authorization="Bearer "+encodePassword(password);
   if(body!==undefined)headers["Content-Type"]="application/json";
-  const res=await fetch(apiUrl+path,{method,headers,body:body===undefined?undefined:JSON.stringify(body),cache:"no-store"});
-  let data={};try{data=await res.json()}catch{}
-  if(!res.ok){const error=new Error(data.error||"Servizio di gestione non raggiungibile.");error.status=res.status;throw error;}
-  return data;
- }
- async function fetchRemote(){
-  const data=await api("/api/document","GET");
-  if(!data.document||!data.sha)throw new Error("Impossibile leggere il documento protetto.");
+  let response;
+  // Riprova le richieste di sola lettura e il controllo password in caso
+  // di breve interruzione. Non ripetere automaticamente un PUT di salvataggio.
+  for(let attempt=0;attempt<(method==="PUT"?1:3);attempt++){
+   try{
+    response=await fetch(apiUrl+path,{method,headers,body:body===undefined?undefined:JSON.stringify(body),cache:"no-store"});
+    break;
+   }catch(err){
+    if(method==="PUT"||attempt===2){
+     const offline=new Error("Impossibile contattare il servizio dedicato ai Club. Verifica la connessione e riprova; le modifiche non sono state pubblicate.");
+     offline.network=true;throw offline;
+    }
+    await new Promise(resolve=>setTimeout(resolve,400+attempt*700));
+   }
+  }
+  let data={};try{data=await response.json()}catch{}
+  if(!response.ok){
+   const error=new Error(data.error||"Il servizio Club ha restituito un errore ("+response.status+").");
+   error.status=response.status;throw error;
+  }
   return data;
  }
  function cleanPage(obj){
