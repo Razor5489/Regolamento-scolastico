@@ -32,9 +32,12 @@ function valid(doc){
       if(!/^[a-zA-Z0-9-]{12,64}$/.test(id) || !entry || typeof entry!=='object' ||
          Array.isArray(entry))return false;
       if(!KEYS.includes(entry.period))return false;
-      if(!Array.isArray(entry.houses)||entry.houses.length<1||entry.houses.length>4||
-         new Set(entry.houses).size!==entry.houses.length ||
-         entry.houses.some(h=>!HOUSES.includes(h)))return false;
+      // House associations are optional in the simple lesson reminder.
+      // Preserve old registrations that contain them without requiring them for new ones.
+      if(entry.houses!==undefined &&
+        (!Array.isArray(entry.houses)||entry.houses.length>4||
+          new Set(entry.houses).size!==entry.houses.length ||
+          entry.houses.some(h=>!HOUSES.includes(h))))return false;
       if(typeof entry.subject!=='string'||!entry.subject.trim()||
          entry.subject.length>120||/^(tempo libero|da programmare)$/i.test(entry.subject.trim()))return false;
       // Reminder-style entries do not require date, time, room or professor.
