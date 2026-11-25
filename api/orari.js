@@ -13,6 +13,13 @@ function valid(doc){
      typeof doc.schedules!=='object'||typeof doc.teachers!=='object')return false;
   if(Object.keys(doc.schedules).length!==4||Object.keys(doc.schedules).some(k=>!KEYS.includes(k)))return false;
   if(Object.keys(doc.teachers).length>40)return false;
+  if(doc.leadership!==undefined){
+    const positions=doc.leadership;
+    if(!positions || typeof positions!=='object' || Array.isArray(positions) ||
+       Object.keys(positions).some(key=>!['preside','vicepreside'].includes(key)) ||
+       typeof positions.preside!=='string'||positions.preside.length>150 ||
+       typeof positions.vicepreside!=='string'||positions.vicepreside.length>150)return false;
+  }
   if(doc.show_teachers!==undefined&&typeof doc.show_teachers!=='boolean')return false;
   if(doc.updated_at!==undefined&&(typeof doc.updated_at!=='string'||doc.updated_at.length>55))return false;
   // Separate timestamp for house points; unlike updated_at it must never
@@ -138,7 +145,8 @@ module.exports=async function(req,res){
   // The role is enforced here, not only by hiding controls in the browser.
   if(role==='docente' && (
     JSON.stringify(payload.base.teachers)!==JSON.stringify(payload.document.teachers) ||
-    payload.base.show_teachers!==payload.document.show_teachers
+    payload.base.show_teachers!==payload.document.show_teachers ||
+    JSON.stringify(payload.base.leadership)!==JSON.stringify(payload.document.leadership)
   ))return res.status(403).json({error:'La password dei professori consente di modificare soltanto gli orari.'});
 
   if(role==='docente'){
