@@ -53,6 +53,11 @@ function computeChanges(base,edited,role){
     }
   }
   if(role==='admin'){
+    for(const office of ['preside','vicepreside']){
+      const previous=str(base.leadership?.[office]);
+      const value=str(edited.leadership?.[office]);
+      if(previous!==value)changes.push({kind:'leadership',office,previous,value});
+    }
     const names=new Set([...Object.keys(base.teachers),...Object.keys(edited.teachers)]);
     for(const name of names){
       const before=base.teachers[name],after=edited.teachers[name];
@@ -92,6 +97,15 @@ function applyChanges(latest,changes){
         previous=target[change.house];
         if(previous!==change.previous&&previous!==change.value)overwritten++;
         if(previous!==change.value){target[change.house]=change.value;applied++;}
+        break;
+      case 'leadership':
+        if(!document.leadership)document.leadership={preside:'Lucian Sharp',vicepreside:''};
+        previous=str(document.leadership[change.office]);
+        if(previous!==change.previous&&previous!==change.value)overwritten++;
+        if(previous!==change.value){
+          document.leadership[change.office]=change.value;
+          applied++;
+        }
         break;
       case 'teacher-delete':
         previous=document.teachers[change.name];
